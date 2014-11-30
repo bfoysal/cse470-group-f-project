@@ -6,7 +6,7 @@
 		<meta name="description" content="Sentir, Responsive admin and dashboard UI kits template">
 		<meta name="keywords" content="admin,bootstrap,template,responsive admin,dashboard template,web apps template">
 		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
-		<title>Hotel de la pacific</title>
+		<title>Login | Hotel de la pacific</title>
  
 		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -43,54 +43,48 @@
 	</head>
  
 	<body class="login tooltips">
+	
+		
+		
+		
+		<!--
+		===========================================================
+		BEGIN PAGE
+		===========================================================
+		-->
 		<div class="login-header text-center">
 			<img src="assets/img/ourlogo.png" class="logo" alt="Logo">
 		</div>
 		<div class="login-wrapper">
-			<form role="form" action="reg_emp.php" method="post">
-				<div class="form-group lg left-feedback no-label">
-				  <input type="text" name="fname" class="form-control no-border input-lg rounded" placeholder="First Name" autofocus>
+			<div class="alert alert-warning alert-bold-border fade in alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <strong>Warning!</strong> Better check yourself, you're <a href="#fakelink" class="alert-link">not looking too good</a>.
+			</div>
+			<!-- <form role="form" action="http://diliat.in/themeforest/sentir/1.0.0/index.html"> -->
+			<form role="form" action="index.html">
+				<div class="form-group has-feedback lg left-feedback no-label">
+				  <input type="text" class="form-control no-border input-lg rounded" placeholder="Enter username" autofocus>
+				  <span class="fa fa-user form-control-feedback"></span>
 				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <input type="text" name="lname" class="form-control no-border input-lg rounded" placeholder="Last Name">
+				<div class="form-group has-feedback lg left-feedback no-label">
+				  <input type="password" class="form-control no-border input-lg rounded" placeholder="Enter password">
+				  <span class="fa fa-unlock-alt form-control-feedback"></span>
 				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <input type="email" name="email" class="form-control no-border input-lg rounded" placeholder="Email">
-				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <input type="password" name="password" class="form-control no-border input-lg rounded" placeholder="Enter password">
-				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <select class="form-control no-border input-lg rounded" name="type">
-				  	<option disabled="disabled">Select Job Type</option>
-					<option>Laundry</option>
-					<option>Room Service</option>
-					<option>Janitor</option>
-					<option>Room Service</option>
-					<option>Receptionist</option>
-				</select>
-				</div>
-				<div class="form-group lg left-feedback no-label">
-			   	<select class="form-control no-border input-lg rounded" name="gender">
-				  	<option disabled="disabled">Select Gender</option>
-					<option>Male</option>
-					<option>Female</option>
-				</select>
-				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <input type="text" name="phone" class="form-control no-border input-lg rounded" placeholder="Phone">
-				</div>
-				<div class="form-group lg left-feedback no-label">
-				  <input type="text" name="salary" class="form-control no-border input-lg rounded" placeholder="Salary">
-				</div>				
-				
 				<div class="form-group">
-					<button type="submit" class="btn btn-warning btn-lg btn-perspective btn-block">REGISTER</button>
+				  <div class="checkbox">
+					<label>
+					  <input type="checkbox" class="i-yellow-flat"> Remember me
+					</label>
+				  </div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-warning btn-lg btn-perspective btn-block">LOGIN</button>
 				</div>
 			</form>
+			<p class="text-center"><strong><a href="forgot-password.html">Forgot your password?</a></strong></p>
+			<p class="text-center">or</p>
+			<p class="text-center"><strong><a href="register.html">Create new account</a></strong></p>
 		</div><!-- /.login-wrapper -->
-		
-	
 		<!--
 		===========================================================
 		END PAGE

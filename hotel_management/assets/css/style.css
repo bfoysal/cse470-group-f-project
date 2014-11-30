@@ -65,11 +65,41 @@ body.lock{
 }
 .login-wrapper{
 	width: 100%;
-	max-width: 300px;
+	max-width: 350px;
 	margin: 215px auto 0;
 	color: #fff;
-	padding: 0 0 30px 0;
+	padding: 30px;
+	background-color:#000;
+	border:1px solid #999999;
+
+    -webkit-transition: all 0.2s ease 0s;
+    -moz-transition: all 0.2s ease 0s;
+    -o-transition: all 0.2s ease 0s;
+    -ms-transition: all 0.2s ease 0s;
+    transition: all 0.2s ease 0s;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
+	
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0.8;
+	
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0.8;
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	opacity: 0.8;
 }
+.button_blue{background:#00b6e9; display:inline-block; width:80px;  padding:0 5px 0 5px; border-radius:3px 3px 3px 3px; -moz-border-radius:3px 3px 3px 3px; -webkit-border-radius:3px 3px 3px 3px; color:#fff; font-size:14px; font-weight:normal; text-align:center; }
+
 .login-wrapper a,
 .login-wrapper a:hover,
 .login-wrapper a:focus{

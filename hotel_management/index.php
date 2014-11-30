@@ -6,8 +6,9 @@
 		<meta name="description" content="Sentir, Responsive admin and dashboard UI kits template">
 		<meta name="keywords" content="admin,bootstrap,template,responsive admin,dashboard template,web apps template">
 		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
-		<title>Hotel de la pacific</title>
+		<title>Hotel De La Pacific</title>
  
+
 		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 		
@@ -43,7 +44,12 @@
 	</head>
  
 	<body class="tooltips">
-		
+	<?PHP
+	session_start();
+	if(!isset($_SESSION["session_hotel_emp"])){
+		header("location: login.html");
+	}
+	?>
 		<!-- BEGIN PANEL DEMO -->
 		<div class="box-demo">
 			<div class="inner-panel">
@@ -127,8 +133,6 @@
 			</div>
 		</div>
 		<!-- END PANEL DEMO -->
-	
-		
 		
 		
 		<!--
@@ -143,17 +147,18 @@
 					
 					<!-- Begin Logo brand -->
 					<div class="logo-brand">
-						<a href="index.html"><img src="assets/img/sentir-logo-primary.png" alt="Sentir logo"></a>
+						<a href="index.php"><img src="assets/img/ourlogo.png" alt="hotel de la pacific"></a>
 					</div><!-- /.logo-brand -->
 					<!-- End Logo brand -->
 					
-					<div class="top-nav-content no-right-sidebar">
-						
+					<div class="top-nav-content">						
 						<!-- Begin button sidebar left toggle -->
 						<div class="btn-collapse-sidebar-left">
 							<i class="fa fa-long-arrow-right icon-dinamic"></i>
 						</div><!-- /.btn-collapse-sidebar-left -->
 						<!-- End button sidebar left toggle -->
+						
+						
 						
 						<!-- Begin button nav toggle -->
 						<div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
@@ -163,20 +168,18 @@
 						
 						
 						<!-- Begin user session nav -->
-						<ul class="nav-user navbar-right full">
+						<ul class="nav-user navbar-right">
 							<li class="dropdown">
-							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="Avatar">
-								Hi, <strong>Farhan</strong>
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="assets/img/avatar/<?PHP echo $_SESSION['session_emp_pic']; ?>" class="avatar img-circle" alt="Avatar">
+								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
 								<li><a href="#fakelink">Account setting</a></li>
-								<li><a href="#fakelink">Payment setting</a></li>
-								<li><a href="#fakelink">Change password</a></li>
-								<li><a href="#fakelink">My public profile</a></li>
+								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
 								<li><a href="lock-screen.html">Lock screen</a></li>
-								<li><a href="login.html">Log out</a></li>
+								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
 						</ul>
@@ -192,59 +195,63 @@
 							</form>
 							<!-- End nav search form -->
 							<ul class="nav navbar-nav navbar-left">
-								
-								<!-- Begin nav task -->
+								<!-- Begin nav notification -->
 								<li class="dropdown">
 									<a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="badge badge-warning icon-count">3</span>
-										<i class="fa fa-tasks"></i>
+										<span class="badge badge-danger icon-count">7</span>
+										<i class="fa fa-bell"></i>
 									</a>
-									<ul class="dropdown-menu square margin-list-rounded with-triangle">
+									<ul class="dropdown-menu square with-triangle">
 										<li>
 											<div class="nav-dropdown-heading">
-											Tasks
+											Notifications
 											</div><!-- /.nav-dropdown-heading -->
 											<div class="nav-dropdown-content scroll-nav-dropdown">
 												<ul>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Creating documentation
-														<span class="small-caps">Completed : Yesterday</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-clock-o absolute-left-content icon-task progress"></i>
-														Eating sands
-														<span class="small-caps">Deadline : Tomorrow</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-clock-o absolute-left-content icon-task progress"></i>
-														Sending payment
-														<span class="small-caps">Deadline : Next week</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-exclamation-circle absolute-left-content icon-task uncompleted"></i>
-														Uploading new version
-														<span class="small-caps">Deadline: 2 seconds ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-exclamation-circle absolute-left-content icon-task uncompleted"></i>
-														Drinking coffee
-														<span class="small-caps">Deadline : 2 hours ago</span>
+														<img src="assets/img/avatar/avatar-2.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Thomas White</strong> posted on your profile page
+														<span class="small-caps">17 seconds ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Walking to nowhere
-														<span class="small-caps">Completed : over a year ago</span>
+														<img src="assets/img/avatar/avatar-3.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Doina Slaivici</strong> uploaded photo
+														<span class="small-caps">10 minutes ago</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-4.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Harry Nichols</strong> commented on your post
+														<span class="small-caps">40 minutes ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Sleeping under bridge
-														<span class="small-caps">Completed : Dec 31, 2013</span>
+														<img src="assets/img/avatar/avatar-5.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Mihaela Cihac</strong> send you a message
+														<span class="small-caps">2 hours ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Buying some cigarettes
-														<span class="small-caps">Completed : 2 days ago</span>
+														<img src="assets/img/avatar/avatar-6.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Harold Chavez</strong> change his avatar
+														<span class="small-caps">Yesterday</span>
+													</a></li>
+													<li class="unread"><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-7.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Elizabeth Owens</strong> posted on your profile page
+														<span class="small-caps">Yesterday</span>
+													</a></li>
+													<li class="unread"><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-8.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Frank Oliver</strong> commented on your post
+														<span class="small-caps">A week ago</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-9.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Mya Weastell</strong> send you a message
+														<span class="small-caps">April 15, 2014</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-10.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Carl Rodriguez</strong> joined your weekend party
+														<span class="small-caps">April 01, 2014</span>
 													</a></li>
 												</ul>
 											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
@@ -252,73 +259,8 @@
 										</li>
 									</ul>
 								</li>
-								<!-- End nav task -->
-								<!-- Begin nav message -->
-								<li class="dropdown">
-									<a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="badge badge-success icon-count">9</span>
-										<i class="fa fa-envelope"></i>
-									</a>
-									<ul class="dropdown-menu square margin-list-rounded with-triangle">
-										<li>
-											<div class="nav-dropdown-heading">
-											Messages
-											</div><!-- /.nav-dropdown-heading -->
-											<div class="nav-dropdown-content scroll-nav-dropdown">
-												<ul>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-25.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-														<span class="small-caps">17 seconds ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-24.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-														<span class="small-caps">10 minutes ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-23.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														I think so
-														<span class="small-caps">40 minutes ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-22.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Yes, I'll be waiting
-														<span class="small-caps">2 hours ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-21.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Thank you!
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-20.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														No problem! I will never remember that
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-19.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Tak gepuk ndasmu sisan lho dab!
-														<span class="small-caps">A week ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-18.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Sorry bro, aku or atau sing jenenge ngono kui
-														<span class="small-caps">April 15, 2014</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-17.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Will you send me an invitation for your weeding party?
-														<span class="small-caps">April 01, 2014</span>
-													</a></li>
-												</ul>
-											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
-											<button class="btn btn-primary btn-square btn-block">See all message</button>
-										</li>
-									</ul>
-								</li>
-								<!-- End nav message -->
-								
+								<!-- End nav notification -->								
+							</ul>
 						</div><!-- /.navbar-collapse -->
 						<!-- End Collapse menu nav -->
 					</div><!-- /.top-nav-content -->
@@ -331,21 +273,7 @@
 			<!-- BEGIN SIDEBAR LEFT -->
 			<div class="sidebar-left sidebar-nicescroller">
 				<ul class="sidebar-menu">
-					<li><a href="index.html"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>
-					<li>
-						<a href="#fakelink">
-							<i class="fa fa-desktop icon-sidebar"></i>
-							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
-							Layout template
-							<span class="badge badge-warning span-sidebar">3</span>
-							</a>
-						<ul class="submenu">
-							<li><a href="index.html">Default layout</a></li>
-							<li><a href="layout-no-sidebar-right.html">No sidebar right<span class="label label-success span-sidebar">CURRENT</span></a></li>
-							<li><a href="layout-profile-left.html">Profile summary left</a></li>
-						</ul>
-					</li>
-					
+					<li><a href="index.php"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>								
 					<li>
 						<a href="#fakelink">
 							<i class="fa fa-folder icon-sidebar"></i>
@@ -353,13 +281,9 @@
 							Forms
 							<span class="label label-info span-sidebar">2</span>
 							</a>
-						<ul class="submenu">
-							
-							
-							<li><a href="element-form-example.html">Customer Form </a></li>
-							
-							<li><a href="element-validation.html">Employee Form</a></li>
-							
+						<ul class="submenu">						
+							<li><a href="add_customer.php">Customer Form </a></li>							
+							<li><a href="add_employee.php">Employee Form</a></li>						
 						</ul>
 					</li>
 					
@@ -370,9 +294,8 @@
 							List
 						</a>
 						<ul class="submenu">
-							<li><a href="table-static.html">Members List</a></li>
-							<li><a href="table-color.html">Customers List</a></li>
-							
+							<li><a href="members_list.php">Employee List</a></li>
+							<li><a href="customer_list.php">Customers List</a></li>							
 						</ul>
 					</li>
 					
@@ -397,6 +320,7 @@
 				</ul>
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
+
 			
 			
 			
@@ -732,8 +656,8 @@
 				
 				<!-- BEGIN FOOTER -->
 				<footer>
-					&copy; 2014 <a href="#fakelink">Hotel De La Pacific</a><br />
-					Design by <a href="http://isohdesign.com/" target="_blank">Foysal and Farhan</a>.
+					&copy; 2014 <a href="#">Hotel De La Pacific</a><br />
+					Developed by <a href="#">Foysal and Farhan</a>.
 				</footer>
 				<!-- END FOOTER -->
 				

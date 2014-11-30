@@ -6,7 +6,7 @@
 		<meta name="description" content="Sentir, Responsive admin and dashboard UI kits template">
 		<meta name="keywords" content="admin,bootstrap,template,responsive admin,dashboard template,web apps template">
 		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
-		<title>Hotel de la pacific</title>
+		<title>Hotel De La Pacific</title>
  
 		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,12 @@
 	</head>
  
 	<body class="tooltips">
-		
+	<?PHP
+	session_start();
+	if(!isset($_SESSION["session_hotel_emp"])){
+		header("location: login.html");
+	}
+	?>		
 		<!-- BEGIN PANEL DEMO -->
 		<div class="box-demo">
 			<div class="inner-panel">
@@ -143,7 +148,7 @@
 					
 					<!-- Begin Logo brand -->
 					<div class="logo-brand">
-						<a href="index.html"><img src="assets/img/sentir-logo-primary.png" alt="Sentir logo"></a>
+						<a href="index.php"><img src="assets/img/ourlogo.png" alt="hotel de la pacific"></a>
 					</div><!-- /.logo-brand -->
 					<!-- End Logo brand -->
 					
@@ -165,18 +170,16 @@
 						<!-- Begin user session nav -->
 						<ul class="nav-user navbar-right">
 							<li class="dropdown">
-							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="Avatar">
-								Hi, <strong>Farhan</strong>
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="assets/img/avatar/<?PHP echo $_SESSION['session_emp_pic']; ?>" class="avatar img-circle" alt="Avatar">
+								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
 								<li><a href="#fakelink">Account setting</a></li>
-								<li><a href="#fakelink">Payment setting</a></li>
-								<li><a href="#fakelink">Change password</a></li>
-								<li><a href="#fakelink">My public profile</a></li>
+								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
 								<li><a href="lock-screen.html">Lock screen</a></li>
-								<li><a href="login.html">Log out</a></li>
+								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
 						</ul>
@@ -192,60 +195,63 @@
 							</form>
 							<!-- End nav search form -->
 							<ul class="nav navbar-nav navbar-left">
-								
-								<!-- End nav notification -->
-								<!-- Begin nav task -->
+								<!-- Begin nav notification -->
 								<li class="dropdown">
 									<a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="badge badge-warning icon-count">3</span>
-										<i class="fa fa-tasks"></i>
+										<span class="badge badge-danger icon-count">7</span>
+										<i class="fa fa-bell"></i>
 									</a>
-									<ul class="dropdown-menu square margin-list-rounded with-triangle">
+									<ul class="dropdown-menu square with-triangle">
 										<li>
 											<div class="nav-dropdown-heading">
-											Tasks
+											Notifications
 											</div><!-- /.nav-dropdown-heading -->
 											<div class="nav-dropdown-content scroll-nav-dropdown">
 												<ul>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Creating documentation
-														<span class="small-caps">Completed : Yesterday</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-clock-o absolute-left-content icon-task progress"></i>
-														Eating sands
-														<span class="small-caps">Deadline : Tomorrow</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-clock-o absolute-left-content icon-task progress"></i>
-														Sending payment
-														<span class="small-caps">Deadline : Next week</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-exclamation-circle absolute-left-content icon-task uncompleted"></i>
-														Uploading new version
-														<span class="small-caps">Deadline: 2 seconds ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<i class="fa fa-exclamation-circle absolute-left-content icon-task uncompleted"></i>
-														Drinking coffee
-														<span class="small-caps">Deadline : 2 hours ago</span>
+														<img src="assets/img/avatar/avatar-2.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Thomas White</strong> posted on your profile page
+														<span class="small-caps">17 seconds ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Walking to nowhere
-														<span class="small-caps">Completed : over a year ago</span>
+														<img src="assets/img/avatar/avatar-3.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Doina Slaivici</strong> uploaded photo
+														<span class="small-caps">10 minutes ago</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-4.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Harry Nichols</strong> commented on your post
+														<span class="small-caps">40 minutes ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Sleeping under bridge
-														<span class="small-caps">Completed : Dec 31, 2013</span>
+														<img src="assets/img/avatar/avatar-5.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Mihaela Cihac</strong> send you a message
+														<span class="small-caps">2 hours ago</span>
 													</a></li>
 													<li class="unread"><a href="#fakelink">
-														<i class="fa fa-check-circle-o absolute-left-content icon-task completed"></i>
-														Buying some cigarettes
-														<span class="small-caps">Completed : 2 days ago</span>
+														<img src="assets/img/avatar/avatar-6.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Harold Chavez</strong> change his avatar
+														<span class="small-caps">Yesterday</span>
+													</a></li>
+													<li class="unread"><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-7.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Elizabeth Owens</strong> posted on your profile page
+														<span class="small-caps">Yesterday</span>
+													</a></li>
+													<li class="unread"><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-8.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Frank Oliver</strong> commented on your post
+														<span class="small-caps">A week ago</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-9.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Mya Weastell</strong> send you a message
+														<span class="small-caps">April 15, 2014</span>
+													</a></li>
+													<li><a href="#fakelink">
+														<img src="assets/img/avatar/avatar-10.jpg" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>Carl Rodriguez</strong> joined your weekend party
+														<span class="small-caps">April 01, 2014</span>
 													</a></li>
 												</ul>
 											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
@@ -253,73 +259,8 @@
 										</li>
 									</ul>
 								</li>
-								<!-- End nav task -->
-								<!-- Begin nav message -->
-								<li class="dropdown">
-									<a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="badge badge-success icon-count">9</span>
-										<i class="fa fa-envelope"></i>
-									</a>
-									<ul class="dropdown-menu square margin-list-rounded with-triangle">
-										<li>
-											<div class="nav-dropdown-heading">
-											Messages
-											</div><!-- /.nav-dropdown-heading -->
-											<div class="nav-dropdown-content scroll-nav-dropdown">
-												<ul>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-25.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-														<span class="small-caps">17 seconds ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-24.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-														<span class="small-caps">10 minutes ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-23.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														I think so
-														<span class="small-caps">40 minutes ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-22.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Yes, I'll be waiting
-														<span class="small-caps">2 hours ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-21.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Thank you!
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-20.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														No problem! I will never remember that
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-19.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Tak gepuk ndasmu sisan lho dab!
-														<span class="small-caps">A week ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-18.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Sorry bro, aku or atau sing jenenge ngono kui
-														<span class="small-caps">April 15, 2014</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-17.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														Will you send me an invitation for your weeding party?
-														<span class="small-caps">April 01, 2014</span>
-													</a></li>
-												</ul>
-											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
-											<button class="btn btn-primary btn-square btn-block">See all message</button>
-										</li>
-									</ul>
-								</li>
-								<!-- End nav message -->
-								
+								<!-- End nav notification -->								
+							</ul>
 						</div><!-- /.navbar-collapse -->
 						<!-- End Collapse menu nav -->
 					</div><!-- /.top-nav-content -->
@@ -332,21 +273,7 @@
 			<!-- BEGIN SIDEBAR LEFT -->
 			<div class="sidebar-left sidebar-nicescroller">
 				<ul class="sidebar-menu">
-					<li><a href="index.html"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>
-					<li>
-						<a href="#fakelink">
-							<i class="fa fa-desktop icon-sidebar"></i>
-							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
-							Layout template
-							<span class="badge badge-warning span-sidebar">3</span>
-							</a>
-						<ul class="submenu">
-							<li><a href="index.html">Default layout<span class="label label-success span-sidebar">CURRENT</span></a></li>
-							<li><a href="layout-no-sidebar-right.html">No sidebar right</a></li>
-							<li><a href="layout-profile-left.html">Profile summary left</a></li>
-						</ul>
-					</li>
-					
+					<li><a href="index.php"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>								
 					<li>
 						<a href="#fakelink">
 							<i class="fa fa-folder icon-sidebar"></i>
@@ -354,13 +281,9 @@
 							Forms
 							<span class="label label-info span-sidebar">2</span>
 							</a>
-						<ul class="submenu">
-							
-							
-							<li><a href="element-form-example.html">Customer Form </a></li>
-							
-							<li><a href="element-validation.html">Employee Form</a></li>
-							
+						<ul class="submenu">						
+							<li><a href="add_customer.php">Customer Form </a></li>							
+							<li><a href="add_employee.php">Employee Form</a></li>						
 						</ul>
 					</li>
 					
@@ -371,9 +294,8 @@
 							List
 						</a>
 						<ul class="submenu">
-							<li><a href="table-static.html">Members List</a></li>
-							<li><a href="table-color.html">Customers List</a></li>
-							
+							<li><a href="members_list.php">Members List</a></li>
+							<li><a href="customer_list.php">Customers List <span class="label label-success span-sidebar">CURRENT</span></a></li>							
 						</ul>
 					</li>
 					
@@ -399,168 +321,56 @@
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
 
-			<!-- BEGIN PAGE CONTENT -->
+		<!-- BEGIN PAGE CONTENT -->
 			<div class="page-content">
 				
 				
 				<div class="container-fluid">
 					<!-- Begin page heading -->
-					<h1 class="page-heading">Invoice <small>Sub heading here</small></h1>
+					<h1 class="page-heading">Customer List <small>Show all customers</small></h1>
 					<!-- End page heading -->
 				
 					<!-- Begin breadcrumb -->
 					<ol class="breadcrumb default square rsaquo sm">
-						<li><a href="index.html"><i class="fa fa-home"></i></a></li>
-						<li><a href="#fakelink">Example pages</a></li>
-						<li class="active">Invoice</li>
+						<li><a href="index.php"><i class="fa fa-home"></i></a></li>
+						<li><a href="index.php">Hotel</a></li>
+						<li class="active">Customers</li>
 					</ol>
 					<!-- End breadcrumb -->
-					
-					
-					<!-- BEGIN INVOICE -->
-					<div class="the-box full invoice">
-						<div class="the-box no-border bg-dark" style="vertical-align: text-middle;">
-							<div class="row">
-								<div class="col-sm-6">
-									<img src="assets/img/logo-login.png" class="logo-invoice" alt="Logo">
-								</div><!-- /.col-sm-6 -->
-								<div class="col-sm-6 text-right">
-									<address>
-									  <strong>Sentir, Inc.</strong><br>
-									  795 Folsom Ave, Suite 600<br>
-									  San Francisco, CA 94107<br>
-									  <abbr title="Phone">P:</abbr> (123) 456-7890
-									</address>
-								</div><!-- /.col-sm-6 -->
-							</div><!-- /.row -->
-						</div><!-- /.the-box no-border bg-dark -->
-						<div class="the-box no-border">
-							<h1 class="text-center">INVOICE</h1>
-							<h3 class="text-muted text-center">#SNTR0024</h3>
-							
-							<div class="row">
-								<div class="col-sm-6">
-								<p>
-									<strong>BILL TO : Harry Nichols</strong>
-								</p>
-								<address>
-								  Ds. Jatirejo RT 2/21<br>
-								  Sendangadi, Mlati, Sleman<br>
-								  Yogyakarta, INDONESIA<br>
-								  <abbr title="Phone">P:</abbr> (123) 456-7890
-								</address>
-								</div><!-- /.col-sm-6 -->
-								<div class="col-sm-6 text-right">
-								<p>Date : April 26, 2014</p>
-								</div><!-- /.col-sm-6 -->
-							</div><!-- /.row -->
-							
-							<div class="table-responsive">
-								<table class="table table-th-block table-striped table-dark">
-									<thead>
-										<tr>
-											<th>DESCRIPTION</th>
-											<th style="width: 60px;">QTY</th>
-											<th style="width: 100px;">PRICE</th>
-											<th style="width: 100px;">SUBTOTAL</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<p><strong>Initial widget design</strong><p>
-												<p class="text-muted">
-												Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-												</p>
-											</td>
-											<td>10</td>
-											<td>&#36;50</td>
-											<td class="text-right"><strong>&#36;500</strong></td>
-										</tr>
-										<tr>
-											<td>
-												<p><strong>Widget development and testing</strong><p>
-												<p class="text-muted">
-												Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-												</p>
-											</td>
-											<td>1</td>
-											<td>&#36;1000</td>
-											<td class="text-right"><strong>&#36;1000</strong></td>
-										</tr>
-										<tr>
-											<td>
-												<p><strong>Widget implementation and review</strong><p>
-												<p class="text-muted">
-												Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-												</p>
-											</td>
-											<td>1</td>
-											<td>&#36;2000</td>
-											<td class="text-right"><strong>&#36;2000</strong></td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr class="success">
-											<td colspan="3" class="text-right">TOTAL</td>
-											<td class="text-right"><strong>&#36;3500</strong></td>
-										</tr>
-										<tr class="warning">
-											<td colspan="3" class="text-right">TAX</td>
-											<td class="text-right"><strong>&#36;75</strong></td>
-										</tr>
-										<tr class="danger">
-											<td colspan="3" class="text-right">GRAND TOTAL</td>
-											<td class="text-right"><strong>&#36;3570</strong></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div><!-- /.table-responsive -->
-							
-							
-							
-							<div class="row">
-								<div class="col-sm-6">
-									<p>
-										<strong>PAYMENT DETAIL</strong>
-									</p>
-									<address>
-									  BANK NAME HERE<br>
-									  Bank code : 123 456<br>
-									  Account number : 1234-4567-8974<br>
-									  IBAN : 123456<br>
-									  BIC : 123456<br>
-									  Payment reference : SNTR0024
-									</address>
-								</div><!-- /.col-sm-6 -->
-								<div class="col-sm-6 text-right">
-									<p>
-										<strong>Other information</strong>
-									</p>
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-								</div><!-- /.col-sm-6 -->
-							</div><!-- /.row -->
-							
-							<div class="jumbotron jumbotron-sm text-center">
-								<h1>Thank you for your business</h1>
-							</div><!-- /.jumbotron .jumbotron-sm -->
-							
-						</div><!-- /.the-box no-border no-margin-->
+
+					<!-- Begin table with avatar -->
+					<h4 class="small-title">Customer Details</h4>
+					<div class="the-box no-border full">
+						<div class="table-responsive">
+							<table class="table table-th-block">
+								<thead>
+									<tr><th style="width: 30px;">No</th><th>Full name</th><th>Location</th><th>Date of birth</th><th>Gender</th></tr>
+								</thead>
+								<tbody>
+									<tr><td>1</td><td><img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="avatar">Paris Hawker</td><td>Yogyakarta, Indonesia</td><td>August 17, 1990</td><td><span class="label label-danger">Female</span></td></tr>
+									<tr><td>2</td><td><img src="assets/img/avatar/avatar-2.jpg" class="avatar img-circle" alt="avatar">Thomas White</td><td>Bndung, Indonesia</td><td>Jan 01, 1987</td><td><span class="label label-success">Male</span></td></tr>
+									<tr><td>3</td><td><img src="assets/img/avatar/avatar-3.jpg" class="avatar img-circle" alt="avatar">Doina Slaivici</td><td>Lombok, Indonesia</td><td>Dec 31, 1993</td><td><span class="label label-danger">Female</span></td></tr>
+									<tr><td>4</td><td><img src="assets/img/avatar/avatar-5.jpg" class="avatar img-circle" alt="avatar">Mihaela Cihac</td><td>Sydney, Australia</td><td>Jun 05, 1992</td><td><span class="label label-danger">Female</span></td></tr>
+									<tr><td>5</td><td><img src="assets/img/avatar/avatar-6.jpg" class="avatar img-circle" alt="avatar">Harold Chavez</td><td>London, United Kingdom</td><td>Mar 10, 1985</td><td><span class="label label-success">Male</span></td></tr>
+									<tr><td>6</td><td><img src="assets/img/avatar/avatar-7.jpg" class="avatar img-circle" alt="avatar">Elizabeth Owens</td><td>New York, US</td><td>Jul 01, 1989</td><td><span class="label label-danger">Female</span></td></tr>
+									<tr><td>7</td><td><img src="assets/img/avatar/avatar-8.jpg" class="avatar img-circle" alt="avatar">Frank Oliver</td><td>Pattaya, Thailand</td><td>Nov 21, 1991</td><td><span class="label label-success">Male</span></td></tr>
+									<tr><td>8</td><td><img src="assets/img/avatar/avatar-9.jpg" class="avatar img-circle" alt="avatar">Mya Weastell</td><td>Boyolali, Indonesia</td><td>Sep 14, 1990</td><td><span class="label label-danger">Female</span></td></tr>
+									<tr><td>9</td><td><img src="assets/img/avatar/avatar-4.jpg" class="avatar img-circle" alt="avatar">Harry Nichols</td><td>Berlin, Germany</td><td>Apr 21, 1987</td><td><span class="label label-success">Male</span></td></tr>
+									<tr><td>10</td><td><img src="assets/img/avatar/avatar-10.jpg" class="avatar img-circle" alt="avatar">Carl Rodriguez</td><td>Melbourne, Australia</td><td>Oct 11, 1988</td><td><span class="label label-success">Male</span></td></tr>
+								</tbody>
+							</table>
+						</div><!-- /.table-responsive -->
 					</div><!-- /.the-box -->
-					<!-- END INVOICE -->
+					<!-- End table with avatar -->
 					
-					
-				
 				</div><!-- /.container-fluid -->
-				
-				
-				
-			<!-- BEGIN FOOTER -->
+				<!-- BEGIN FOOTER -->
 				<footer>
-					&copy; 2014 <a href="#fakelink">Hotel De La Pacific</a><br />
-					Design by <a href="http://isohdesign.com/" target="_blank">Foysal and Farhan</a>.
+					&copy; 2014 <a href="#">Hotel De La Pacific</a><br />
+					Developed by <a href="#">Foysal and Farhan</a>.
 				</footer>
 				<!-- END FOOTER -->
+				
 				
 			</div><!-- /.page-content -->
 		</div><!-- /.wrapper -->

@@ -23,8 +23,8 @@
 
     
 </head>
-<body>
-  <div id="preloader"></div>
+<body><?PHP session_start(); ?>
+  <!--<div id="preloader"></div>-->
 
   <div class="layout">
 
@@ -32,7 +32,7 @@
     <!-- BEGIN HEADER -->
     <header>
       <div class="container">
-        <a href="#home_slider" id="logo">Hotel</a>
+        <a href="#home_slider" id=""><img src="images/ourlogo.png" height="75" width="160"></a>
         <nav>
           <ul>
             <li><a href="#home_slider">Hotel</a></li>
@@ -40,7 +40,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#location">Location</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contact</a></li>	
           </ul> 
         </nav>
       </div>
@@ -140,7 +140,7 @@
               </div>
               <label class='medium first_inputs'>
                 <span>Type of room:</span>
-                <select class='select_white' name='type' >
+                <select class='select_white' name='type' required>
                   <option disabled selected>Room Type</option> 
                   <option value="single">Single room</option>
                   <option value="double">Double Room</option>
@@ -162,35 +162,12 @@
                   <option>1</option>
                   <option>2</option>
                 </select>              
-              </label>   
-              <label for="" class='button'>
-                <span>book</span>
-                <a href='#' class="btn">Book now</a>             
               </label>
-              <div class="clearfix"></div>
-              <div class="hidden_elements">
-                <label for="" class='first_inputs'>
-                  <span>First Name</span>
-                  <input type="text" name='fname'>
-                </label>
-				<label for="" class='first_inputs'>
-                  <span>Last Name</span>
-                  <input type="text" name='lname'>
-                </label>
-                <label for="" class='first_inputs'>
-                  <span>Email</span>
-                  <input type="email" name='email1'>
-                </label>				
-                <label for="" class='textarea'>
-                  <span>Details</span>
-                  <textarea name='comments'></textarea>
-                </label>
-                <label for="" class='button submit'>
+              <label for="" class='button submit'>
                   <span>book</span>
                   <button class="btn" type='submit'>Book now</button>
-                </label>
-                <div class="clearfix"></div>
-              </div>
+               </label>
+              <div class="clearfix"></div>
             </form>
 
             <div id="video_section">
@@ -374,7 +351,6 @@
           </div>
         </section>
         <!-- End of #contact  -->
-
     </div>
     <!-- END CONTENT -->
 
@@ -387,7 +363,21 @@
   <!-- BEGIN FOOTER -->
   <footer>
     <div class="container">
+	 <?PHP 		  
+	  if(isset($_SESSION["session_hotel"])){
+		  $cust_lname=$_SESSION["session_cust_lname"]; 
+		  echo 'Hello ' .$cust_lname.'!! Wanna <a href="#logout" onClick="MyWindow=window.open(\'logout.php\',\'_self\',\'MyWindow\'); return false;" style="color:#000000">Logout? </a>'; 
+		  echo '<a href="#Order" onClick="MyWindow=window.open(\'reg/view_order.php\',\'_self\',\'MyWindow\'); return false;" style="color:#FFFFFF">View your Orders</a>';
+	  }
+	  else{
+	  	  echo '<a href="#Register" style="color:#FFFFFF" onClick="MyWindow=window.open(\'reg/register.html\',\'_self\',\'MyWindow\'); return false;">Wanna Register? Existing Customer?</a>';
+	  }
+	  ?>
+		  <br>
+	
+	
       <small>&copy; 2014 The Hotel. All Rights Reserved. Developed by <b>Group F</b></small>
+	 
       <nav class="right">
         <ul>
           <li><a href="#home_slider">Hotel</a></li>
@@ -396,6 +386,9 @@
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#location">Location</a></li>
           <li><a href="#contact">Contact</a></li>
+		  <li>
+		  
+		  </li>
         </ul>
       </nav>
     </div>
