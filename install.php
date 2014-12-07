@@ -92,5 +92,6 @@ do {
         $res->free();
     }
 } while ($mysqli->more_results() && $mysqli->next_result());
-echo"<br>Completed!<br><a href='hotel_home/index.php'>Visit The Hotel Management Software</a>";
+echo"<br>Completed!<br><a href='hotel_home/index.php'>Visit The Hotel Management Website</a>";
+echo"<br><a href='hotel_management/index.php'>Visit The Hotel Management Dashboard</a>";
 ?>

@@ -176,7 +176,7 @@
 								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="#fakelink">Account setting</a></li>
+								<li><a href="edit_employee.php?emp_id=<?PHP echo $_SESSION['session_emp_id']; ?>">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
 								<li><a href="lock-screen.php">Lock screen</a></li>
@@ -457,11 +457,11 @@
 										</tr>
 										<tr class="warning">
 											<td colspan="3" class="text-right">TAX</td>
-											<td class="text-right"><strong>&#36;75</strong></td>
+											<td class="text-right"><strong><?PHP $tax=$total*0.05; echo $tax; ?></strong></td>
 										</tr>
 										<tr class="danger">
 											<td colspan="3" class="text-right">GRAND TOTAL</td>
-											<td class="text-right"><strong>&#36;3570</strong></td>
+											<td class="text-right"><strong><?PHP $grand_total=$total+$tax; echo $grand_total; ?></strong></td>
 										</tr>
 									</tfoot>
 								</table>
@@ -474,27 +474,30 @@
 									<p>
 										<strong>PAYMENT DETAIL</strong>
 									</p>
-									<address>
-									  BANK NAME HERE<br>
-									  Bank code : 123 456<br>
-									  Account number : 1234-4567-8974<br>
-									  IBAN : 123456<br>
-									  BIC : 123456<br>
-									  Payment reference : SNTR0024
-									</address>
+									<address> <?PHP
+										echo $fname.' '.$lname.'<br>'.$address.'<br><abbr title="Phone">Ph:</abbr> '.$phone; 
+								  		?>
+								</address>
 								</div><!-- /.col-sm-6 -->
 								<div class="col-sm-6 text-right">
 									<p>
 										<strong>Other information</strong>
 									</p>
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+									<p><br>*Conditions Apply: 5% VAT</p>
 								</div><!-- /.col-sm-6 -->
 							</div><!-- /.row -->
 							
 							<div class="jumbotron jumbotron-sm text-center">
 								<h1>Thank you! Come back soon!</h1>
-							</div><!-- /.jumbotron .jumbotron-sm -->
-							
+							</div><!-- /.jumbotron .jumbotron-sm --><br>
+							<form role="form" action="bill_cust.php" method="post">
+								<input type="hidden" name="cust_id" value="<?PHP echo $cust_id; ?>">
+								<input type="hidden" name="amount" value="<?PHP echo $grand_total; ?>">	
+								<input type="hidden" name="c_date" value="<?PHP echo $_GET['date']; ?>">
+								<div class="form-group">
+									<button type="submit" class="btn btn-block btn-primary btn-sm">CHECK OUT NOW!</button>
+								</div>
+							</form>
 						</div><!-- /.the-box no-border no-margin-->
 					</div><!-- /.the-box -->
 					<!-- END INVOICE -->				

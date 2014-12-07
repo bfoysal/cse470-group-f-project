@@ -172,7 +172,7 @@
 								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="#">Account setting</a></li>
+								<li><a href="edit_employee.php?emp_id=<?PHP echo $_SESSION['session_emp_id']; ?>">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
 								<li><a href="lock-screen.php">Lock screen</a></li>
@@ -313,7 +313,7 @@
 						<div class="table-responsive">
 							<table class="table table-th-block">
 								<thead>
-									<tr><th style="width: 30px;">ID:</th><th>Full name</th><th>Credit Card</th><th>Phone</th><th>Order Food</th></tr>
+									<tr><th style="width: 30px;">ID:</th><th>Full name</th><th>Credit Card</th><th>Phone</th><th>Order Services</th></tr>
 								</thead>								
 								<tbody>
 								<?PHP
@@ -331,7 +331,7 @@
 												<td>'.$fname.' '.$lname.'</td>
 												<td>'.$credit_card.'</td>
 												<td>'.$phone_no.'</td>
-												<td><a href="add_service.php?cust_id='.$cust_id.'"><span class="label label-danger">Add Services</span></a></td>
+												<td><a href="add_service.php?cust_id='.$cust_id.'"><span class="label label-success">Add Services</span></a></td>
 											</tr>';
 									 }
 								 }

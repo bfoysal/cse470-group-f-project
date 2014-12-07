@@ -176,7 +176,7 @@
 								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="#">Account setting</a></li>
+								<li><a href="edit_employee.php?emp_id=<?PHP echo $_SESSION['session_emp_id']; ?>">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
 								<li><a href="lock-screen.php">Lock screen</a></li>

@@ -16,10 +16,6 @@ if($numrows!=0){
 	}
 	$date = date("m/d/Y");
 	header("Location: invoice.php?date=$date&cust_id=$cust_id"); 
-//	$sql=mysql_query("INSERT INTO bill VALUES(null, '$date', '$total_price', '$cust_id')");
-//	if(!$sql){ 
-//		echo die(mysql_error());
-//	}
 }else{
 	echo 'not found';
 }

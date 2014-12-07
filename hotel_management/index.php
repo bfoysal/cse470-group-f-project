@@ -176,10 +176,10 @@
 								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="#fakelink">Account setting</a></li>
+								<li><a href="edit_employee.php?emp_id=<?PHP echo $_SESSION['session_emp_id']; ?>">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
-								<li><a href="lock-screen.html">Lock screen</a></li>
+								<li><a href="lock-screen.php">Lock screen</a></li>
 								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
@@ -319,13 +319,18 @@
 							<div class="the-box no-border bg-success tiles-information">
 								<i class="fa fa-users icon-bg"></i>
 								<div class="tiles-inner text-center">
-									<p>TODAY VISITORS</p>
-									<h1 class="bolded">30</h1> 
+									<p>TOTAL CUSTOMERS</p>
+									<?PHP
+										$sql=mysql_query("SELECT COUNT(*) FROM customer");
+										$row=mysql_fetch_array($sql);										
+										$t_guest=$row['COUNT(*)'];
+									?>
+									<h1 class="bolded"><?PHP echo $t_guest; ?></h1> 
 									<div class="progress no-rounded progress-xs">
 									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 									  </div><!-- /.progress-bar .progress-bar-success -->
 									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 7,5% )</small></p>
+									<p><small></small></p>
 								</div><!-- /.tiles-inner -->
 							</div><!-- /.the-box no-border -->
 						</div><!-- /.col-sm-3 -->
@@ -333,13 +338,18 @@
 							<div class="the-box no-border bg-primary tiles-information">
 								<i class="fa fa-shopping-cart icon-bg"></i>
 								<div class="tiles-inner text-center">
-									<p>TODAY BOOKED</p>
-									<h1 class="bolded">10</h1> 
+									<?PHP
+										$sql=mysql_query("SELECT COUNT(*) FROM customer INNER JOIN rooms ON rooms.cust_id=customer.cust_id WHERE status='Booked'");
+										$row=mysql_fetch_array($sql);										
+										$t_bookings=$row['COUNT(*)'];
+									?>
+									<p>TOTAL BOOKINGS</p>
+									<h1 class="bolded"><?PHP echo $t_bookings; ?></h1> 
 									<div class="progress no-rounded progress-xs">
 									  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 									  </div><!-- /.progress-bar .progress-bar-primary -->
 									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 10,5% )</small></p>
+									<p><small></small></p>
 								</div><!-- /.tiles-inner -->
 							</div><!-- /.the-box no-border -->
 						</div><!-- /.col-sm-3 -->
@@ -347,13 +357,24 @@
 							<div class="the-box no-border bg-danger tiles-information">
 								<i class="fa fa-comments icon-bg"></i>
 								<div class="tiles-inner text-center">
-									<p>TODAY CHECKOUT</p>
-									<h1 class="bolded">4</h1> 
+									<?PHP
+										$sql=mysql_query("SELECT check_out FROM customer INNER JOIN rooms ON rooms.cust_id=customer.cust_id WHERE status='Filled'");										
+										$checkouts_today=0;
+										while ($row = mysql_fetch_array($sql)) {									
+											$check_out=$row['check_out'];
+											$date = date("m/d/Y");
+											if(round(abs(strtotime($check_out)-strtotime($date))/86400)==0){
+												$checkouts_today++;								
+											}
+										}
+									?>
+									<p>CHECKOUTS TODAY</p>
+									<h1 class="bolded"><?PHP echo $checkouts_today; ?></h1> 
 									<div class="progress no-rounded progress-xs">
 									  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 									  </div><!-- /.progress-bar .progress-bar-danger -->
 									</div><!-- /.progress .no-rounded -->
-									<p><small>Less than yesterday ( <span class="text-danger">-7,5%</span> )</small></p>
+									<p><small></small></p>
 								</div><!-- /.tiles-inner -->
 							</div><!-- /.the-box no-border -->
 						</div><!-- /.col-sm-3 -->
@@ -361,13 +382,20 @@
 							<div class="the-box no-border bg-warning tiles-information">
 								<i class="fa fa-money icon-bg"></i>
 								<div class="tiles-inner text-center">
-									<p>TODAY EARNINGS</p>
-									<h1 class="bolded">50,000 tk</h1> 
+									<?PHP
+										$sql=mysql_query("SELECT * FROM bill");										
+										$total_earnings=0;
+										while ($row = mysql_fetch_array($sql)) {									
+											$total_earnings+=$row['amount'];
+										}
+									?>
+									<p>TOTAL EARNINGS</p>
+									<h1 class="bolded"><?PHP echo $total_earnings; ?></h1> 
 									<div class="progress no-rounded progress-xs">
 									  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 									  </div><!-- /.progress-bar .progress-bar-warning -->
 									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 2,5% )</small></p>
+									<p><small></small></p>
 								</div><!-- /.tiles-inner -->
 							</div><!-- /.the-box no-border -->
 						</div><!-- /.col-sm-3 -->
@@ -377,7 +405,6 @@
 					
 					<div class="row">
 						<div class="col-lg-8">
-							<hr />
 							<div class="row">
 								<div class="col-sm-6">
 									<!-- BEGIN PROPERTY CARD -->
@@ -428,79 +455,39 @@
 								</div><!-- /.col-sm-6 -->
 								
 								<div class="col-sm-6">
-									<!-- BEGIN TASK LIST -->
-									<div class="panel panel-success panel-square panel-no-border task-list-wrap">
-									  <div class="panel-heading lg">
-										<h3 class="panel-title"><i class="fa fa-check-square-o"></i> Your current tasks</h3>
-									  </div>
-										<ul class="list-group">
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-1">
-											 <label for="task-1">Check Reservations</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-2" checked />
-											 <label for="task-2">Check E-Mails</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-3" checked />
-											  <label for="task-3">Manage Employees</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-4" checked />
-											  <label for="task-4">Daily Room Service </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-5">
-											 <label for="task-5">Update Employee <i> status </i> </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-6" checked />
-											 <label for="task-6"> Calculate Daily Transaction </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-7">
-											 <label for="task-7">Calculate Daily Profit</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-8" checked />
-											 <label for="task-8">Calculate Daily Cost</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-9" checked />
-											 <label for="task-9">Report Daily Issues</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-10" />
-											 <label for="task-10">Edit To Do list </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										</ul>
-									  <div class="panel-footer">
-										<p><button class="btn btn-danger btn-perspective btn-block">See all tasks</button></p>
-									  </div>
-									</div><!-- /.panel panel-success -->
-									<!-- END TASK LIST -->
-								</div><!-- /.col-sm-6 -->
+									<!-- BEGIN REMINDER WIDGET -->
+							<div class="the-box no-border full">
+								<div class="the-box bg-dark no-border no-margin">
+									<p class="text-center"><i class="fa fa-clock-o icon-lg"></i></p>
+									<h4 class="bolded less-distance text-danger text-center">My Notifications</h4>
+								</div><!-- /.the-box no-border no-margin -->
+								
+								<div class="the-box no-border bg-danger no-margin">
+	
+									<div id="tiles-slide-1" class="owl-carousel my-reminder">
+									<?PHP
+									$sql="SELECT * FROM notification INNER JOIN customer ON notification.cust_id = customer.cust_id ORDER BY (not_id) DESC";
+									$result=mysql_query($sql);
+									while ($row = mysql_fetch_array($result)) {	
+										$not_id=$row['not_id'];
+										$lname=$row['last_name'];
+										$fname=$row['first_name'];
+										$descr=$row['descr'];
+										echo '<div class="item full text-left"><p>'.$descr.'</p><p class="small">'.$fname.' '.$lname.'</p></div>';
+									}
+									?>
+									</div><!-- /#tiles-slide-1 -->
+								</div><!-- /.the-box no-border bg-danger no-margin -->
+							</div><!-- /.the-box .no-border .full -->
+							<!-- END REMINDER WIDGET -->
+								</div>
+								<!-- /.col-sm-6 -->
+								<div class="col-xs-6">
+									<div class="tiles twitter-tile text-center">
+										<i class="fa fa-twitter icon-lg-size"></i>
+										<h4><a href="http://facebook.com">2K Likes</a></h4>
+									</div><!-- /.tiles .twitter-tile -->
+								</div><!-- /.col-xs-6 -->
 							</div><!-- /.row -->
 							
 						</div><!-- /.col-sm-8 -->
@@ -546,13 +533,13 @@
 					</div><!-- /.row -->
 					
 					<div class="row">
-						<div class="col-sm-8">
+						<div class="col-sm-12">
 							
 							<!-- BEGIN ITEM SHOWCASE -->
 							<div class="the-box full no-border item-lg">
 								<div id="store-item-carousel-2" class="owl-carousel">
-								  <div class="item full"><img src="assets/img/photo/large/img-7.jpg" class="item-image" alt="Image"></div>
-								  <div class="item full"><img src="assets/img/photo/large/img-8.jpg" class="item-image" alt="Image"></div>
+								  <div class="item full"><img src="assets/img/photo/large/img-7.jpg" width="1400" height="795" class="item-image" alt="Image"></div>
+								  <div class="item full"><img src="assets/img/photo/large/img-8.jpg" width="1400" height="795" class="item-image" alt="Image"></div>
 								</div>
 								<div class="item-des">
 									<div class="the-box transparent no-margin">
@@ -568,55 +555,14 @@
 											<i class="fa fa-star text-warning"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-										</p>
-										
+										</p>										
 									</div><!-- /.the-box .transparent .no-margin -->
 								</div><!-- /.item-des -->
 							</div><!-- /.the-box .full -->
 							<!-- END ITEM SHOWCASE -->
-							
-						</div><!-- /.col-sm-8 -->
-						<div class="col-sm-4">
-							
-							<!-- BEGIN REMINDER WIDGET -->
-							<div class="the-box no-border full">
-								<div class="the-box bg-dark no-border no-margin">
-									<p class="text-center"><i class="fa fa-clock-o icon-lg"></i></p>
-									<h4 class="bolded less-distance text-danger text-center">My personal reminder</h4>
-								</div><!-- /.the-box no-border no-margin -->
-								<div class="the-box no-border bg-danger no-margin">
-								<h4>Next week agenda</h4>
-								<hr />
-									<div id="tiles-slide-1" class="owl-carousel my-reminder">
-									  <div class="item full text-left">
-										<p>
-										Eating some sand and listening alay songs in the small hole under bridge
-										</p>
-										<p class="small">Wrote about a month ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Go to school again, do homework again, meet some best friends again
-										</p>
-										<p class="small">Wrote about a week ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Finishing all my works, time to vacation, spending time with family and friends
-										</p>
-										<p class="small">Wrote 2 days ago</p>
-									  </div>
-									</div><!-- /#tiles-slide-1 -->
-								</div><!-- /.the-box no-border bg-danger no-margin -->
-							</div><!-- /.the-box .no-border .full -->
-							<!-- END REMINDER WIDGET -->
-							
-						</div><!-- /.col-sm-4 -->
 					</div><!-- /.row -->
 				
 				</div><!-- /.container-fluid -->
-				
-				
 				
 				<!-- BEGIN FOOTER -->
 				<footer>
