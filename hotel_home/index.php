@@ -23,7 +23,7 @@
 
     
 </head>
-<body><?PHP session_start(); ?>
+<body><?PHP session_start(); require_once 'config.php'; ?>
   <!--<div id="preloader"></div>-->
 
   <div class="layout">
@@ -139,12 +139,23 @@
                 </div>
               </div>
               <label class='medium first_inputs'>
+			  <?PHP 
+			  $sql_pack="SELECT * FROM packages INNER JOIN room_price ON packages.pack_type=room_price.room_type WHERE active='Yes' order by packages.pack_type DESC";
+			  $result_pack=mysql_query($sql_pack);
+			  
+			  ?>
                 <span>Type of room:</span>
                 <select class='select_white' name='type' required>
                   <option disabled selected>Room Type</option> 
-                  <option value="single">Single room</option>
-                  <option value="double">Double Room</option>
-				  <option value="triple">Triple Room</option>
+                  <option value="Single">Single room</option>
+                  <option value="Double">Double Room</option>
+				  <option value="Triple">Triple Room</option>
+				  <?PHP
+				  while($row = mysql_fetch_array($result_pack)){
+				  $pack_type=$row['pack_type'];
+				  echo'<option value="'.$pack_type.'">'.$pack_type.'</option>';
+				  }
+				  ?>
                 </select>              
               </label>    
               <label class='medium first_inputs'>

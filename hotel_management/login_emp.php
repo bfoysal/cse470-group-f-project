@@ -1,10 +1,9 @@
 <?php
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
-
 require_once 'config.php';
 	
-$sql=mysql_query("SELECT * FROM employee WHERE email='$email' AND password='$password'");
+$sql=mysql_query("SELECT * FROM employee WHERE email='$email' AND password='$password' AND emp_type='Manager'");
 $numrows=mysql_num_rows($sql);	
 if($numrows!=0){
 	while($row=mysql_fetch_assoc($sql)){

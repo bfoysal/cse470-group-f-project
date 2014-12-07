@@ -8,7 +8,6 @@
 		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
 		<title>Hotel De La Pacific</title>
  
-
 		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 		
@@ -50,7 +49,7 @@
 		header("location: login.html");
 	}
 	require_once 'config.php';
-	?>
+	?>	
 		<!-- BEGIN PANEL DEMO -->
 		<div class="box-demo">
 			<div class="inner-panel">
@@ -133,9 +132,7 @@
 				<button class="btn btn-block btn-primary btn-sm" id="btn-reset">Reset to default</button>
 			</div>
 		</div>
-		<!-- END PANEL DEMO -->
-		
-		
+		<!-- END PANEL DEMO -->		
 		<!--
 		===========================================================
 		BEGIN PAGE
@@ -152,21 +149,19 @@
 					</div><!-- /.logo-brand -->
 					<!-- End Logo brand -->
 					
-					<div class="top-nav-content">						
+					<div class="top-nav-content">
+						
 						<!-- Begin button sidebar left toggle -->
 						<div class="btn-collapse-sidebar-left">
 							<i class="fa fa-long-arrow-right icon-dinamic"></i>
 						</div><!-- /.btn-collapse-sidebar-left -->
 						<!-- End button sidebar left toggle -->
 						
-						
-						
 						<!-- Begin button nav toggle -->
 						<div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
 							<i class="fa fa-plus icon-plus"></i>
 						</div><!-- /.btn-collapse-sidebar-right -->
 						<!-- End button nav toggle -->
-						
 						
 						<!-- Begin user session nav -->
 						<ul class="nav-user navbar-right">
@@ -179,7 +174,7 @@
 								<li><a href="#fakelink">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
-								<li><a href="lock-screen.html">Lock screen</a></li>
+								<li><a href="lock-screen.php">Lock screen</a></li>
 								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
@@ -188,6 +183,7 @@
 						
 						<!-- Begin Collapse menu nav -->
 						<div class="collapse navbar-collapse" id="main-fixed-nav">
+
 							<!-- Begin nav search form -->
 							<form class="navbar-form navbar-left" role="search">
 								<div class="form-group">
@@ -237,7 +233,7 @@
 										</li>
 									</ul>
 								</li>
-								<!-- End nav notification -->								
+								<!-- End nav notification -->
 							</ul>
 						</div><!-- /.navbar-collapse -->
 						<!-- End Collapse menu nav -->
@@ -246,12 +242,9 @@
 			</div><!-- /.top-navbar -->
 			<!-- END TOP NAV -->
 			
-			
-			
-			<!-- BEGIN SIDEBAR LEFT -->
 			<div class="sidebar-left sidebar-nicescroller">
 				<ul class="sidebar-menu">
-					<li><a href="index.php"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>								
+					<li><a href="index.php"><i class="fa fa-dashboard icon-sidebar"></i>Dashboard</a></li>
 					<li>
 						<a href="#fakelink">
 							<i class="fa fa-folder icon-sidebar"></i>
@@ -259,13 +252,14 @@
 							Forms
 							<span class="label label-info span-sidebar">2</span>
 							</a>
-						<ul class="submenu">						
-							<li><a href="add_customer.php">Customer Form </a></li>							
-							<li><a href="add_employee.php">Employee Form</a></li>						
+						<ul class="submenu">
+							<li><a href="add_customer.php">Customer Form</a></li>							
+							<li><a href="add_employee.php">Employee Form <span class="label label-success span-sidebar">CURRENT</span></a></li>	
 						</ul>
-					</li>		
+					</li>
+					
 					<li>
-						<a href="#">
+						<a href="#fakelink">
 							<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
 							List
@@ -273,10 +267,10 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="members_list.php">Employee List</a></li>
-							<li><a href="customer_list.php">Customers List</a></li>
-							<li><a href="rooms_list.php">Rooms List</a></li>							
+							<li><a href="customer_list.php">Customers List</a></li>	
+							<li><a href="rooms_list.php">Rooms List</a></li>						
 						</ul>
-					</li>			
+					</li>
 					<li>
 						<a href="#">
 							<i class="fa fa-table icon-sidebar"></i>
@@ -292,327 +286,96 @@
 				</ul>
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
-
 			
 			
-			
+			<!-- BEGIN SIDEBAR RIGHT HEADING -->
+			<div class="sidebar-right-heading">
+				<ul class="nav nav-tabs square nav-justified">
+				  <li class="active"><a href="#online-user-sidebar" data-toggle="tab"><i class="fa fa-comments"></i></a></li>
+				  <li><a href="#notification-sidebar" data-toggle="tab"><i class="fa fa-bell"></i></a></li>
+				  <li><a href="#task-sidebar" data-toggle="tab"><i class="fa fa-tasks"></i></a></li>
+				  <li><a href="#setting-sidebar" data-toggle="tab"><i class="fa fa-cogs"></i></a></li>
+				</ul>
+			</div><!-- /.sidebar-right-heading -->
+			<!-- END SIDEBAR RIGHT HEADING -->
+					
 			<!-- BEGIN PAGE CONTENT -->
 			<div class="page-content">
+				
+				
 				<div class="container-fluid">
+					<!-- Begin page heading -->
+					<h1 class="page-heading">Assign Room <small></small></h1>
+					<!-- End page heading -->
 				
-				<!-- Begin page heading -->
-				<h1 class="page-heading">Hotel de la pacific <small>Hotel Management</small></h1>
-				<!-- End page heading -->
-				
-					<!-- BEGIN EXAMPLE ALERT -->
-					<div class="alert alert-warning alert-bold-border fade in alert-dismissable">
-					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					  <p><strong>Welcome!</strong></p>
-					  <p class="text-muted"> You can do your daily chores here <i class="fa fa-smile-o"></i></p>
-					</div>
-					<!-- END EXAMPLE ALERT -->
-				
-					
-					<!-- BEGIN SiTE INFORMATIONS -->
+					<!-- Begin breadcrumb -->
+					<ol class="breadcrumb default square rsaquo sm">
+						<li><a href="index.php"><i class="fa fa-home"></i></a></li>
+						<li><a href="index.php">Hotel</a></li>
+						<li class="active">Assign Room</li>
+					</ol>
+					<!-- End breadcrumb -->
+
 					<div class="row">
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-success tiles-information">
-								<i class="fa fa-users icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY VISITORS</p>
-									<h1 class="bolded">30</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-success -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 7,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-primary tiles-information">
-								<i class="fa fa-shopping-cart icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY BOOKED</p>
-									<h1 class="bolded">10</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-primary -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 10,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-danger tiles-information">
-								<i class="fa fa-comments icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY CHECKOUT</p>
-									<h1 class="bolded">4</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-danger -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Less than yesterday ( <span class="text-danger">-7,5%</span> )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-warning tiles-information">
-								<i class="fa fa-money icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY EARNINGS</p>
-									<h1 class="bolded">50,000 tk</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-warning -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 2,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-					</div><!-- /.row -->
-					<!-- END SITE INFORMATIONS -->
-				
-					
-					<div class="row">
-						<div class="col-lg-8">
-							<hr />
-							<div class="row">
-								<div class="col-sm-6">
-									<!-- BEGIN PROPERTY CARD -->
-									<div class="panel panel-danger panel-square panel-no-border task-list-wrap">
-									  <div class="panel-heading lg text-center">
-										<h3 class="panel-title">SPECIAL OFFERS</h3>
-									  </div>
-										<div class="the-box full no-border property-card">
-											<div id="property-slide-8" class="owl-carousel">
-											  <div class="item full"><img src="assets/img/photo/small/index01.jpg" alt="Image"></div>
-											  <div class="item full"><img src="assets/img/photo/small/index02.jpg" alt="Image"></div>
-											  <div class="item full"><img src="assets/img/photo/small/index03.jpg" alt="Image"></div>
-											</div>
-											<div class="the-box no-margin no-border bg-warning">
-											<?PHP
-											$sql_pack="SELECT * FROM packages INNER JOIN room_price ON packages.pack_type=room_price.room_type WHERE active='Yes' order by packages.pack_type DESC";
-											$result_pack=mysql_query($sql_pack);
-									        $row = mysql_fetch_array($result_pack);
-											$pack_no=$row['pack_no'];
-											$pack_type=$row['pack_type'];
-											$price=$row['room_price'];												
-											?>	
-												<div class="row">
-													<div class="col-xs-3">
-														<p class="property-type-circle bg-danger">Price </p>
-													</div><!-- /.col-xs-3 -->
-													<div class="col-xs-9">
-														<h1><?PHP echo $price; ?>/day</h1>
-														
-													</div><!-- /.col-xs-9 -->
-												</div><!-- /.row -->
-											</div><!-- /.the-box .no-margin .no-border .bg-warning -->
-											<div class="the-box no-margin no-border">
-												<p class="property-detail-wrap">
-													<span class="item-detail"><i class="fa fa-inbox"></i> Sea Facing Balcony</span>
-													<span class="item-detail"><i class="fa fa-male"></i> King Size Bed</span>
-												</p>
-												<p class="has-margin text-center">Package Type: <?PHP echo $pack_type; ?></p>
-												<div class="row">
-													<div class="panel-footer">
-														<a href="show_advertise.php"><button class="btn btn-danger btn-perspective btn-block">Edit Advertisements</button></a>
-													</div><!-- /.col-xs-6 -->
-												</div><!-- /.row -->
-											</div><!-- /.the-box .no-margin .no-border .bg-warning -->
-										</div><!-- /.the-box no-margin -->
-									</div><!-- /.panel panel-danger panel-no-border panel-square task-list-wrap -->
-									<!-- END PROPERTY CARD -->									
-								</div><!-- /.col-sm-6 -->
-								
-								<div class="col-sm-6">
-									<!-- BEGIN TASK LIST -->
-									<div class="panel panel-success panel-square panel-no-border task-list-wrap">
-									  <div class="panel-heading lg">
-										<h3 class="panel-title"><i class="fa fa-check-square-o"></i> Your current tasks</h3>
-									  </div>
-										<ul class="list-group">
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-1">
-											 <label for="task-1">Check Reservations</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-2" checked />
-											 <label for="task-2">Check E-Mails</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-3" checked />
-											  <label for="task-3">Manage Employees</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-4" checked />
-											  <label for="task-4">Daily Room Service </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-5">
-											 <label for="task-5">Update Employee <i> status </i> </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-6" checked />
-											 <label for="task-6"> Calculate Daily Transaction </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-7">
-											 <label for="task-7">Calculate Daily Profit</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-8" checked />
-											 <label for="task-8">Calculate Daily Cost</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-9" checked />
-											 <label for="task-9">Report Daily Issues</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-10" />
-											 <label for="task-10">Edit To Do list </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										</ul>
-									  <div class="panel-footer">
-										<p><button class="btn btn-danger btn-perspective btn-block">See all tasks</button></p>
-									  </div>
-									</div><!-- /.panel panel-success -->
-									<!-- END TASK LIST -->
-								</div><!-- /.col-sm-6 -->
-							</div><!-- /.row -->
-							
-						</div><!-- /.col-sm-8 -->
-						<div class="col-lg-4">
-						
-							<!-- BEGIN WEATHER WIDGET 3 -->
-							<div class="the-box no-border" id="weather-widget-1">
-								<h4 class="text-center bolded white-text">Dhaka, Gulshan</h4>
-								<p class="text-center white-text">TONIGHT</p>
-								<div class="weather-widget">
-									<div class="row">
-										<div class="col-xs-6 text-center">
-											<canvas id="sleet" width="140" height="140"></canvas>
-										</div><!-- /.col-xs-6 -->
-										<div class="col-xs-6">
-											<h1 class="bolded degrees white-text">28<i class="wi-degrees"></i></h1>
-											<p class="white-text">Will rain at night</p>
-										</div><!-- /.col-xs-6 -->
-									</div><!-- /.row -->
-								</div><!-- /.weather-widget -->
-								<div class="row">
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">SAT</h4>
-									<canvas id="clear-night" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">27<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">SUN</h4>
-									<canvas id="fog" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">26<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">MON</h4>
-									<canvas id="snow" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">15<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-								</div><!-- /.row -->
-							</div><!-- /.the-box bg-info no-border -->
-							<!-- END WEATHER WIDGET 2 -->
-							
-			
-						</div><!-- /.col-sm-4 -->
-					</div><!-- /.row -->
-					
-					<div class="row">
-						<div class="col-sm-8">
-							
-							<!-- BEGIN ITEM SHOWCASE -->
-							<div class="the-box full no-border item-lg">
-								<div id="store-item-carousel-2" class="owl-carousel">
-								  <div class="item full"><img src="assets/img/photo/large/img-7.jpg" class="item-image" alt="Image"></div>
-								  <div class="item full"><img src="assets/img/photo/large/img-8.jpg" class="item-image" alt="Image"></div>
+						<div class="col-sm-6">
+							<div class="the-box">
+								<h4 class="small-title">Assign Room to Guest</h4>
+								<form role="form" action="assign_room_ctrl.php" method="post">
+								<div class="form-group lg left-feedback">
+									<label>Customer Name</label>
+								 	 <select class="form-control" name="cust_id">
+								  		<?PHP
+										$sql_cust="SELECT * FROM customer";
+										$result_cust=mysql_query($sql_cust);
+										while($row_cust=mysql_fetch_array($result_cust)){
+											$cust_id=$row_cust['cust_id'];
+											$fname=$row_cust['first_name'];
+											$lname=$row_cust['last_name'];
+											echo'<option value="'.$cust_id.'">'.$fname.' '.$lname.'</option>';
+										}
+										?>
+									</select>
 								</div>
-								<div class="item-des">
-									<div class="the-box transparent no-margin">
-									<h4 class="small-heading more-margin-bottom">ABOUT OUR HOTEL</h4>
-										<h1><a href="#fakelink">Hotel De La Pacific</a></h1>
-										
-										<p class="text-muted item-des-text">
-										Hustle, Loyalty, Respect
-										</p>
-										<p>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</p>
-										
-									</div><!-- /.the-box .transparent .no-margin -->
-								</div><!-- /.item-des -->
-							</div><!-- /.the-box .full -->
-							<!-- END ITEM SHOWCASE -->
-							
+								<div class="form-group lg left-feedback">
+									<label>Room Number</label>
+								 	<input type="text" name="room_no" disabled="disabled" class="form-control" value="<?PHP $room_no=$_GET['room_no']; echo $room_no;?>">
+									<input type="hidden" name="room_no" value="<?PHP $room_no=$_GET['room_no']; echo $room_no;?>">
+								</div>
+								<div class="form-group lg left-feedback">
+									<label>Check In</label>
+									<input type="text" name="check_in" class="form-control" placeholder="MM/DD/YEAR">
+								</div>
+								<div class="form-group lg left-feedback">
+									<label>Check out</label>
+									<input type="text" name="check_out" class="form-control" placeholder="MM/DD/YEAR">
+								</div>
+									<div class="form-group lg left-feedback">
+									<?PHP
+									$sql_room="SELECT * FROM rooms WHERE room_no='$room_no'";
+									$result_room=mysql_query($sql_room);
+									$row_room=mysql_fetch_array($result_room);
+									$room_type=$row_room['type'];
+									if(!$result_room){
+										die(mysql_error());
+									}
+									?><label>Room Type</label>
+								    <input type="text" disabled="disabled" name="check_out" class="form-control" value="<?PHP echo $room_type; ?>">
+								</div>
+								 <p class="signin button"> 
+									<button type="submit" class="btn btn-danger"><i class="fa fa-sign-in"></i> SUBMIT</button><br>
+									<a href="add_customer.php" class="pull-right">Create New Customer?</a>
+								</p>
+							</form>
+							</div><!-- /.the-box -->
 						</div><!-- /.col-sm-8 -->
-						<div class="col-sm-4">
-							
-							<!-- BEGIN REMINDER WIDGET -->
-							<div class="the-box no-border full">
-								<div class="the-box bg-dark no-border no-margin">
-									<p class="text-center"><i class="fa fa-clock-o icon-lg"></i></p>
-									<h4 class="bolded less-distance text-danger text-center">My personal reminder</h4>
-								</div><!-- /.the-box no-border no-margin -->
-								<div class="the-box no-border bg-danger no-margin">
-								<h4>Next week agenda</h4>
-								<hr />
-									<div id="tiles-slide-1" class="owl-carousel my-reminder">
-									  <div class="item full text-left">
-										<p>
-										Eating some sand and listening alay songs in the small hole under bridge
-										</p>
-										<p class="small">Wrote about a month ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Go to school again, do homework again, meet some best friends again
-										</p>
-										<p class="small">Wrote about a week ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Finishing all my works, time to vacation, spending time with family and friends
-										</p>
-										<p class="small">Wrote 2 days ago</p>
-									  </div>
-									</div><!-- /#tiles-slide-1 -->
-								</div><!-- /.the-box no-border bg-danger no-margin -->
-							</div><!-- /.the-box .no-border .full -->
-							<!-- END REMINDER WIDGET -->
-							
+						
+						
+						
 						</div><!-- /.col-sm-4 -->
+						
 					</div><!-- /.row -->
+					
+					
 				
 				</div><!-- /.container-fluid -->
 				
@@ -628,7 +391,7 @@
 				
 			</div><!-- /.page-content -->
 		</div><!-- /.wrapper -->
-		<!-- END PAGE CONTENT -->
+		<!-- END PAGE CONTENT -->		
 		<!--
 		===========================================================
 		END PAGE
@@ -693,6 +456,9 @@
 		<!-- C3 JS -->
 		<script src="assets/plugins/c3-chart/d3.v3.min.js" charset="utf-8"></script>
 		<script src="assets/plugins/c3-chart/c3.min.js"></script>
+		
+		
+		<script src="assets/plugins/validator/example.js"></script>
 		
 		<!-- MAIN APPS JS -->
 		<script src="assets/js/apps.js"></script>

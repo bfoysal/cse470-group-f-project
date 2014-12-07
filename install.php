@@ -1,3 +1,10 @@
+<?PHP 
+$mysqli = new mysqli("localhost", "root", "");
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+echo 'Database has been connected... <br> Now installing...';
+$sql = "drop database if exists hotel;  
 create database hotel;
 use hotel;
 create table customer (cust_id int not null auto_increment, first_name varchar(20), last_name varchar(20), cust_email varchar (30), gender varchar(10), address varchar(30), phone_no varchar(10), credit_card varchar(16), password varchar(20), primary key(cust_id));
@@ -73,4 +80,17 @@ insert into employee values (null,'Touhidur','Rahaman','mama@gmail.com','Room Se
 insert into employee values (null,'Arshad','Arafat','mugdha@gmail.com','Receptionist','Male','9500','9169815','password','7.jpg');
 
 insert into notification values(null, 'Booking', '1', 'A new booking is made, verify it!');
-insert into notification values(null, 'Booking', '2', 'A new booking is made, verify it!');
+insert into notification values(null, 'Booking', '2', 'A new booking is made, verify it!');";
+		   
+if (!$mysqli->multi_query($sql)) {
+    echo "Multi query failed: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+
+do {
+    if ($res = $mysqli->store_result()) {
+        var_dump($res->fetch_all(MYSQLI_ASSOC));
+        $res->free();
+    }
+} while ($mysqli->more_results() && $mysqli->next_result());
+echo"<br>Completed!<br><a href='hotel_home/index.php'>Visit The Hotel Management Software</a>";
+?>

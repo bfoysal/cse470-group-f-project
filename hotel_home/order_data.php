@@ -5,8 +5,13 @@ $check_out = isset($_POST['check_out']) ? $_POST['check_out'] : '';
 $rooms = isset($_POST['rooms']) ? $_POST['rooms'] : '';
 
 require_once 'config.php';
-
-$sql="SELECT COUNT(*) FROM rooms WHERE type='$type' AND status='vacant'";
+if ($type=='Eid' || $type=='Summer'|| $type=='Honeymoon'|| $type=='Executive'|| $type=='Anniversary'){
+	$sql="SELECT COUNT(*) FROM rooms WHERE room_no like '40%' AND status='Vacant'";
+}
+else{
+	$sql="SELECT COUNT(*) FROM rooms WHERE type='$type' AND status='Vacant'";
+}
+echo $sql;
 $result=mysql_query($sql);
 if($result === FALSE) {
 	die(mysql_error());
@@ -14,6 +19,7 @@ if($result === FALSE) {
 if (mysql_num_rows($result) > 0) {			
 	while ($row = mysql_fetch_array($result)) {
 		$room_number = $row['COUNT(*)'];
+		echo $room_number;
 	}
 }
 if($rooms<=$room_number){
@@ -34,7 +40,7 @@ else{
 	echo '<script language="javascript">';
 	echo 'alert("Not Enough Room Available!!")';
 	echo '</script>';
-	header("refresh:1; url=index.php" ); 
+	//header("refresh:1; url=index.php" ); 
 }
 
 ?>

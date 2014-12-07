@@ -48,6 +48,7 @@
 	if(!isset($_SESSION["session_hotel_emp"])){
 		header("location: login.html");
 	}
+	require_once 'config.php';
 	?>		
 		<!-- BEGIN PANEL DEMO -->
 		<div class="box-demo">
@@ -175,10 +176,10 @@
 								Hi, <strong><?PHP echo $_SESSION['session_emp_lname']; ?> </strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-								<li><a href="#fakelink">Account setting</a></li>
+								<li><a href="#">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
-								<li><a href="lock-screen.html">Lock screen</a></li>
+								<li><a href="lock-screen.php">Lock screen</a></li>
 								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
@@ -198,7 +199,16 @@
 								<!-- Begin nav notification -->
 								<li class="dropdown">
 									<a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<span class="badge badge-danger icon-count">7</span>
+										<span class="badge badge-danger icon-count">
+										<?PHP										
+										$sql="SELECT COUNT(*) FROM notification";
+										$result=mysql_query($sql);
+										while ($row = mysql_fetch_array($result)) {	
+											$num=$row['COUNT(*)'];
+											echo $num;
+										}									
+										?>
+										</span>
 										<i class="fa fa-bell"></i>
 									</a>
 									<ul class="dropdown-menu square with-triangle">
@@ -208,58 +218,26 @@
 											</div><!-- /.nav-dropdown-heading -->
 											<div class="nav-dropdown-content scroll-nav-dropdown">
 												<ul>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-2.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Thomas White</strong> posted on your profile page
-														<span class="small-caps">17 seconds ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-3.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Doina Slaivici</strong> uploaded photo
-														<span class="small-caps">10 minutes ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-4.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Harry Nichols</strong> commented on your post
-														<span class="small-caps">40 minutes ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-5.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Mihaela Cihac</strong> send you a message
-														<span class="small-caps">2 hours ago</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-6.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Harold Chavez</strong> change his avatar
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-7.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Elizabeth Owens</strong> posted on your profile page
-														<span class="small-caps">Yesterday</span>
-													</a></li>
-													<li class="unread"><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-8.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Frank Oliver</strong> commented on your post
-														<span class="small-caps">A week ago</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-9.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Mya Weastell</strong> send you a message
-														<span class="small-caps">April 15, 2014</span>
-													</a></li>
-													<li><a href="#fakelink">
-														<img src="assets/img/avatar/avatar-10.jpg" class="absolute-left-content img-circle" alt="Avatar">
-														<strong>Carl Rodriguez</strong> joined your weekend party
-														<span class="small-caps">April 01, 2014</span>
-													</a></li>
+												<?PHP
+												$sql="SELECT * FROM notification INNER JOIN customer ON notification.cust_id = customer.cust_id ORDER BY (not_id) DESC";
+												$result=mysql_query($sql);
+												while ($row = mysql_fetch_array($result)) {	
+													$not_id=$row['not_id'];
+													$lname=$row['last_name'];
+													$fname=$row['first_name'];
+													$descr=$row['descr'];									
+													echo'<li class="unread"><a href="access_notification.php?not_id='.$not_id.'">
+														<img src="assets/img/not_logo.png" class="absolute-left-content img-circle" alt="Avatar">
+														<strong>'.$fname.' '.$lname.'</strong><span class="small-caps">'.$descr.'</span></a></li>';
+												}
+												?>
 												</ul>
 											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
-											<button class="btn btn-primary btn-square btn-block">See all notifications</button>
+											<a class="btn btn-primary btn-square btn-block" href="notifications.php">See all notifications</a>
 										</li>
 									</ul>
 								</li>
-								<!-- End nav notification -->								
+								<!-- End nav notification -->							
 							</ul>
 						</div><!-- /.navbar-collapse -->
 						<!-- End Collapse menu nav -->
@@ -292,32 +270,26 @@
 							<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
 							List
+							<span class="label label-danger span-sidebar">3</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="members_list.php">Members List</a></li>
-							<li><a href="customer_list.php">Customers List <span class="label label-success span-sidebar">CURRENT</span></a></li>							
+							<li><a href="members_list.php">Employee List</a></li>
+							<li><a href="customer_list.php">Customers List <span class="label label-success span-sidebar">CURRENT</span></a></li>
+							<li><a href="rooms_list.php">Rooms List</a></li>					
 						</ul>
 					</li>
-					
-					<li class="static">Settings & Others </li>
-					
 					<li>
-						<a href="#fakelink">
-							<i class="fa fa-heart icon-sidebar"></i>
+						<a href="#">
+							<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
-							Expand
+							Customer Services
+							<span class="label label-success span-sidebar">2</span>
 						</a>
 						<ul class="submenu">
-							
-							<li><a href="forgot-password.html">Forgot password</a></li>
-							<li><a href="register.html">Register</a></li>
-							<li><a href="example-pricing-table.html">Pricing table</a></li>
-							<li><a href="example-invoice.html">Invoice</a></li>
-							<li><a href="example-faq.html">FAQ</a></li>
+							<li><a href="bill_food.php">Food 24/7</a></li>
+							<li><a href="bill_services.php">Facilities</a></li>						
 						</ul>
-					</li>
-					
-				</ul>
+					</li>				</ul>
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
 
@@ -344,19 +316,40 @@
 						<div class="table-responsive">
 							<table class="table table-th-block">
 								<thead>
-									<tr><th style="width: 30px;">No</th><th>Full name</th><th>Location</th><th>Date of birth</th><th>Gender</th></tr>
-								</thead>
+									<tr><th style="width: 30px;">ID:</th><th>Full name</th><th>Location</th><th>Email</th><th>Credit Card</th><th>Phone</th><th>Gender</th><th>Facilities</th><th>Food</th></tr>
+								</thead>								
 								<tbody>
-									<tr><td>1</td><td><img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="avatar">Paris Hawker</td><td>Yogyakarta, Indonesia</td><td>August 17, 1990</td><td><span class="label label-danger">Female</span></td></tr>
-									<tr><td>2</td><td><img src="assets/img/avatar/avatar-2.jpg" class="avatar img-circle" alt="avatar">Thomas White</td><td>Bndung, Indonesia</td><td>Jan 01, 1987</td><td><span class="label label-success">Male</span></td></tr>
-									<tr><td>3</td><td><img src="assets/img/avatar/avatar-3.jpg" class="avatar img-circle" alt="avatar">Doina Slaivici</td><td>Lombok, Indonesia</td><td>Dec 31, 1993</td><td><span class="label label-danger">Female</span></td></tr>
-									<tr><td>4</td><td><img src="assets/img/avatar/avatar-5.jpg" class="avatar img-circle" alt="avatar">Mihaela Cihac</td><td>Sydney, Australia</td><td>Jun 05, 1992</td><td><span class="label label-danger">Female</span></td></tr>
-									<tr><td>5</td><td><img src="assets/img/avatar/avatar-6.jpg" class="avatar img-circle" alt="avatar">Harold Chavez</td><td>London, United Kingdom</td><td>Mar 10, 1985</td><td><span class="label label-success">Male</span></td></tr>
-									<tr><td>6</td><td><img src="assets/img/avatar/avatar-7.jpg" class="avatar img-circle" alt="avatar">Elizabeth Owens</td><td>New York, US</td><td>Jul 01, 1989</td><td><span class="label label-danger">Female</span></td></tr>
-									<tr><td>7</td><td><img src="assets/img/avatar/avatar-8.jpg" class="avatar img-circle" alt="avatar">Frank Oliver</td><td>Pattaya, Thailand</td><td>Nov 21, 1991</td><td><span class="label label-success">Male</span></td></tr>
-									<tr><td>8</td><td><img src="assets/img/avatar/avatar-9.jpg" class="avatar img-circle" alt="avatar">Mya Weastell</td><td>Boyolali, Indonesia</td><td>Sep 14, 1990</td><td><span class="label label-danger">Female</span></td></tr>
-									<tr><td>9</td><td><img src="assets/img/avatar/avatar-4.jpg" class="avatar img-circle" alt="avatar">Harry Nichols</td><td>Berlin, Germany</td><td>Apr 21, 1987</td><td><span class="label label-success">Male</span></td></tr>
-									<tr><td>10</td><td><img src="assets/img/avatar/avatar-10.jpg" class="avatar img-circle" alt="avatar">Carl Rodriguez</td><td>Melbourne, Australia</td><td>Oct 11, 1988</td><td><span class="label label-success">Male</span></td></tr>
+								<?PHP
+								$sql="SELECT * FROM customer";
+								$result=mysql_query($sql);
+								if (mysql_num_rows($result) > 0) {	
+									while ($row = mysql_fetch_array($result)) {	
+										$cust_id=$row['cust_id'];
+										$fname=$row['first_name'];
+										$lname=$row['last_name'];
+										$cust_email=$row['cust_email'];
+										$gender=$row['gender'];
+										$address=$row['address'];						
+										$phone_no=$row['phone_no'];
+										$credit_card=$row['credit_card'];
+										echo'<tr>
+												<td>'.$cust_id.'</td>
+												<td>'.$fname.' '.$lname.'</td>
+												<td>'.$address.'</td>
+												<td>'.$cust_email.'</td>
+												<td>'.$credit_card.'</td>
+												<td>'.$phone_no.'</td>';
+												if ($gender=='Female'){
+													echo '<td><span class="label label-warning">'.$gender.'</span></td>';
+												}else{
+													echo '<td><span class="label label-success">'.$gender.'</span></td>';
+												}
+											 echo'<td><a href="add_service.php?cust_id='.$cust_id.'"><span class="label label-danger">Add Services</span></a></td>
+											 <td><a href="add_food.php?cust_id='.$cust_id.'"><span class="label label-info">Add Food</span></a></td>
+											 </tr>';
+									 }
+								 }
+								 ?>								
 								</tbody>
 							</table>
 						</div><!-- /.table-responsive -->

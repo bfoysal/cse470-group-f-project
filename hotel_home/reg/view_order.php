@@ -29,10 +29,22 @@
             <section>				
                 <div id="container_demo" >
                     <div id="wrapper">
-                        <div id="login" class="animate form" style="width: 470px;">
+                        <div id="login" class="animate form" style="width: 500px;">
 						<h4 class="small-title" align="center"><strong>Room Reservation</strong></h4><br>
 						<div>
 						<table>
+						<?PHP 
+								session_start();
+								if(!isset($_SESSION["session_hotel"])){
+									header("location: ../index.php");
+								}
+								$cust_id=$_SESSION['session_cust_id'];
+								$total_price='0';
+								$set=false;
+								require_once '../config.php';
+								$sql=mysql_query("SELECT * FROM rooms INNER JOIN room_price ON rooms.type=room_price.room_type WHERE cust_id='$cust_id'");
+								$numrows=mysql_num_rows($sql);	
+								if($numrows!=0){?>
 							<thead>
 								<tr>
 									<th>Room No.&nbsp;</th>
@@ -45,53 +57,48 @@
 								</tr>
 							</thead>
 							<tbody>
-							<?PHP 
-								session_start();
-								$cust_id=$_SESSION['session_cust_id'];
-								require_once '../config.php';
-								$sql=mysql_query("SELECT * FROM rooms INNER JOIN room_price ON rooms.type=room_price.room_type WHERE cust_id='$cust_id'");
-								$numrows=mysql_num_rows($sql);	
-								if($numrows!=0){
-									$total_price=0;
-									while($row=mysql_fetch_assoc($sql)){
-										$room_no=$row['room_no'];
-										$type=$row['type'];
-										$check_in=$row['check_in'];
-										$check_out=$row['check_out'];
-										$status=$row['status'];
-										$price=$row['room_price'];
-										$total_price+=$price;
-										$set=false;
-										if($status=='filled'){
-											$set=true;
-										}
-										echo'<tr>
-											<td>'.$room_no.' &nbsp;</td>
-											<td>'.$type.' &nbsp;</td>
-											<td>'.$check_in.' &nbsp;</td>
-											<td>'.$check_out.' &nbsp;</td>
-											<td>'.$status.' &nbsp;</td>
-											<td>'.$price.' &nbsp;</td>
-											<td><a href="../delete_order.php?room_no='.$room_no.'"><img src="images/action_delete.gif"></a></td>
-										</tr>';
-									}
-								}else {
-									echo "<tr><td><br> No Booking!</td></tr>";
+							<?PHP
+							while($row=mysql_fetch_assoc($sql)){
+								$room_no=$row['room_no'];
+								$type=$row['type'];
+								$check_in=$row['check_in'];
+								$check_out=$row['check_out'];
+								$status=$row['status'];
+								$price=$row['room_price'];
+								$total_price+=$price;
+								if($status=='Verified'){
+									$set=true;
+								}else{
+									$set=false;
 								}
+								echo'<tr>
+									<td>'.$room_no.' &nbsp;</td>
+									<td>'.$type.' &nbsp;</td>
+									<td>'.$check_in.' &nbsp;</td>
+									<td>'.$check_out.' &nbsp;</td>
+									<td>'.$status.' &nbsp;</td>
+									<td>'.$price.' &nbsp;</td>
+									<td><a href="../delete_order.php?room_no='.$room_no.'"><img src="images/action_delete.gif"></a></td>
+								</tr>';
+								}
+							}else {
+								echo "<tr><td><br> No Booking!</td></tr>";
+							}
 							?>
 							</tbody>
 						</table>
 						<table>
 							<tr>
-								<td> Total Price: &nbsp;</td>		
-								<td>
-									<?PHP echo $total_price;
-									if($set==true) {
-										echo 'Your account info has been verified! You can pay now!!';
-									}
-									?> &nbsp;
-								</td>
+								<td> Total Price: <?PHP echo $total_price; ?></td>
 							</tr>
+							<tr>
+								<td>
+									<?PHP 
+									if($set==true) {
+										echo '<br>Your account info has been verified and credit card has been charged!!';
+									}
+									?>
+								</td></tr>
 						</table>	
 						</div>
 						</div>

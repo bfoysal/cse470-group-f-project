@@ -8,7 +8,6 @@
 		<meta name="author" content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
 		<title>Hotel De La Pacific</title>
  
-
 		<!-- BOOTSTRAP CSS (REQUIRED ALL PAGE)-->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 		
@@ -50,7 +49,7 @@
 		header("location: login.html");
 	}
 	require_once 'config.php';
-	?>
+	?>		
 		<!-- BEGIN PANEL DEMO -->
 		<div class="box-demo">
 			<div class="inner-panel">
@@ -134,6 +133,8 @@
 			</div>
 		</div>
 		<!-- END PANEL DEMO -->
+	
+		
 		
 		
 		<!--
@@ -152,14 +153,13 @@
 					</div><!-- /.logo-brand -->
 					<!-- End Logo brand -->
 					
-					<div class="top-nav-content">						
+					<div class="top-nav-content">
+						
 						<!-- Begin button sidebar left toggle -->
 						<div class="btn-collapse-sidebar-left">
 							<i class="fa fa-long-arrow-right icon-dinamic"></i>
 						</div><!-- /.btn-collapse-sidebar-left -->
 						<!-- End button sidebar left toggle -->
-						
-						
 						
 						<!-- Begin button nav toggle -->
 						<div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
@@ -179,7 +179,7 @@
 								<li><a href="#fakelink">Account setting</a></li>
 								<li><a href="upload_pic.html">Change Picture</a></li>
 								<li class="divider"></li>
-								<li><a href="lock-screen.html">Lock screen</a></li>
+								<li><a href="lock-screen.php">Lock screen</a></li>
 								<li><a href="logout.php">Log out</a></li>
 							  </ul>
 							</li>
@@ -263,9 +263,10 @@
 							<li><a href="add_customer.php">Customer Form </a></li>							
 							<li><a href="add_employee.php">Employee Form</a></li>						
 						</ul>
-					</li>		
+					</li>
+					
 					<li>
-						<a href="#">
+						<a href="#fakelink">
 							<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
 							List
@@ -273,10 +274,10 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="members_list.php">Employee List</a></li>
-							<li><a href="customer_list.php">Customers List</a></li>
-							<li><a href="rooms_list.php">Rooms List</a></li>							
+							<li><a href="customer_list.php">Customers List</a></li>		
+							<li><a href="rooms_list.php">Rooms List</a></li>						
 						</ul>
-					</li>			
+					</li>
 					<li>
 						<a href="#">
 							<i class="fa fa-table icon-sidebar"></i>
@@ -293,331 +294,212 @@
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
 
-			
-			
-			
-			<!-- BEGIN PAGE CONTENT -->
+		<!-- BEGIN PAGE CONTENT -->
 			<div class="page-content">
+				
+				
 				<div class="container-fluid">
+					<!-- Begin page heading -->
+					<h1 class="page-heading">Invoice <small>Generate invoice for customers</small></h1>
+					<!-- End page heading -->
 				
-				<!-- Begin page heading -->
-				<h1 class="page-heading">Hotel de la pacific <small>Hotel Management</small></h1>
-				<!-- End page heading -->
+					<!-- Begin breadcrumb -->
+					<ol class="breadcrumb default square rsaquo sm">
+						<li><a href="index.php"><i class="fa fa-home"></i></a></li>
+						<li><a href="index.php">Hotel</a></li>
+						<li class="active">Invoice</li>
+					</ol>
+					<!-- End breadcrumb -->
 				
-					<!-- BEGIN EXAMPLE ALERT -->
-					<div class="alert alert-warning alert-bold-border fade in alert-dismissable">
-					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					  <p><strong>Welcome!</strong></p>
-					  <p class="text-muted"> You can do your daily chores here <i class="fa fa-smile-o"></i></p>
-					</div>
-					<!-- END EXAMPLE ALERT -->
+				<!-- BEGIN INVOICE -->
+				<?PHP
+				$cust_id=$_GET['cust_id'];
+				$sql_cust="SELECT * FROM customer INNER JOIN rooms ON customer.cust_id=rooms.cust_id INNER JOIN room_price ON room_price.room_type=rooms.type WHERE customer.cust_id='$cust_id'";
+				$result=mysql_query($sql_cust);
+				$all_rooms='';
+				$total_room_price='';
+				$room_count='';
+				$days_stayed='';				
+				$total_fac_price='';
+				$fac_count='';
+				$fac_type='';
+				$food_type='';
+				$total_food_price='';
+				$food_count='';
+				while($row=mysql_fetch_array($result)){
+					$fname=$row['first_name'];
+					$lname=$row['last_name'];
+					$cust_email=$row['cust_email'];
+					$phone=$row['phone_no'];
+					$credit_card=$row['credit_card'];
+					$address=$row['address'];
+					$room_price=$row['room_price'];
+					$check_in=$row['check_in'];
+					$check_out=$row['check_out'];
+					$days_stayed=round(abs(strtotime($check_out)-strtotime($check_in))/86400);
+					$days_stayed++;
+					$room_price=$room_price*$days_stayed;
+					$all_rooms.=$row['room_no'].' ';
+					$total_room_price+=$room_price;					
+					$room_count++;
+				}				
+				?>
 				
-					
-					<!-- BEGIN SiTE INFORMATIONS -->
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-success tiles-information">
-								<i class="fa fa-users icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY VISITORS</p>
-									<h1 class="bolded">30</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-success -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 7,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-primary tiles-information">
-								<i class="fa fa-shopping-cart icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY BOOKED</p>
-									<h1 class="bolded">10</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-primary -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 10,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-danger tiles-information">
-								<i class="fa fa-comments icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY CHECKOUT</p>
-									<h1 class="bolded">4</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-danger -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Less than yesterday ( <span class="text-danger">-7,5%</span> )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-						<div class="col-sm-3">
-							<div class="the-box no-border bg-warning tiles-information">
-								<i class="fa fa-money icon-bg"></i>
-								<div class="tiles-inner text-center">
-									<p>TODAY EARNINGS</p>
-									<h1 class="bolded">50,000 tk</h1> 
-									<div class="progress no-rounded progress-xs">
-									  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									  </div><!-- /.progress-bar .progress-bar-warning -->
-									</div><!-- /.progress .no-rounded -->
-									<p><small>Better than yesterday ( 2,5% )</small></p>
-								</div><!-- /.tiles-inner -->
-							</div><!-- /.the-box no-border -->
-						</div><!-- /.col-sm-3 -->
-					</div><!-- /.row -->
-					<!-- END SITE INFORMATIONS -->
-				
-					
-					<div class="row">
-						<div class="col-lg-8">
-							<hr />
+					<div class="the-box full invoice">
+						<div class="the-box no-border bg-dark" style="vertical-align: text-middle;">
 							<div class="row">
 								<div class="col-sm-6">
-									<!-- BEGIN PROPERTY CARD -->
-									<div class="panel panel-danger panel-square panel-no-border task-list-wrap">
-									  <div class="panel-heading lg text-center">
-										<h3 class="panel-title">SPECIAL OFFERS</h3>
-									  </div>
-										<div class="the-box full no-border property-card">
-											<div id="property-slide-8" class="owl-carousel">
-											  <div class="item full"><img src="assets/img/photo/small/index01.jpg" alt="Image"></div>
-											  <div class="item full"><img src="assets/img/photo/small/index02.jpg" alt="Image"></div>
-											  <div class="item full"><img src="assets/img/photo/small/index03.jpg" alt="Image"></div>
-											</div>
-											<div class="the-box no-margin no-border bg-warning">
-											<?PHP
-											$sql_pack="SELECT * FROM packages INNER JOIN room_price ON packages.pack_type=room_price.room_type WHERE active='Yes' order by packages.pack_type DESC";
-											$result_pack=mysql_query($sql_pack);
-									        $row = mysql_fetch_array($result_pack);
-											$pack_no=$row['pack_no'];
-											$pack_type=$row['pack_type'];
-											$price=$row['room_price'];												
-											?>	
-												<div class="row">
-													<div class="col-xs-3">
-														<p class="property-type-circle bg-danger">Price </p>
-													</div><!-- /.col-xs-3 -->
-													<div class="col-xs-9">
-														<h1><?PHP echo $price; ?>/day</h1>
-														
-													</div><!-- /.col-xs-9 -->
-												</div><!-- /.row -->
-											</div><!-- /.the-box .no-margin .no-border .bg-warning -->
-											<div class="the-box no-margin no-border">
-												<p class="property-detail-wrap">
-													<span class="item-detail"><i class="fa fa-inbox"></i> Sea Facing Balcony</span>
-													<span class="item-detail"><i class="fa fa-male"></i> King Size Bed</span>
-												</p>
-												<p class="has-margin text-center">Package Type: <?PHP echo $pack_type; ?></p>
-												<div class="row">
-													<div class="panel-footer">
-														<a href="show_advertise.php"><button class="btn btn-danger btn-perspective btn-block">Edit Advertisements</button></a>
-													</div><!-- /.col-xs-6 -->
-												</div><!-- /.row -->
-											</div><!-- /.the-box .no-margin .no-border .bg-warning -->
-										</div><!-- /.the-box no-margin -->
-									</div><!-- /.panel panel-danger panel-no-border panel-square task-list-wrap -->
-									<!-- END PROPERTY CARD -->									
+									<img src="assets/img/ourlogo.png" class="logo-invoice" alt="Logo">
 								</div><!-- /.col-sm-6 -->
-								
+								<div class="col-sm-6 text-right">
+									<address>
+									  <strong>Hotel De La Pacific</strong><br>
+									  66 Mohakhali<br>
+									  Dhaka<br>
+									  Phone: +880-2-8824051-4<br>
+									  Email: support@hotel.com
+									</address>
+								</div><!-- /.col-sm-6 -->
+							</div><!-- /.row -->
+						</div><!-- /.the-box no-border bg-dark -->
+						<div class="the-box no-border">
+							<h1 class="text-center">INVOICE</h1>
+							<h3 class="text-muted text-center"></h3>
+							
+							<div class="row">
 								<div class="col-sm-6">
-									<!-- BEGIN TASK LIST -->
-									<div class="panel panel-success panel-square panel-no-border task-list-wrap">
-									  <div class="panel-heading lg">
-										<h3 class="panel-title"><i class="fa fa-check-square-o"></i> Your current tasks</h3>
-									  </div>
-										<ul class="list-group">
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-1">
-											 <label for="task-1">Check Reservations</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-2" checked />
-											 <label for="task-2">Check E-Mails</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-3" checked />
-											  <label for="task-3">Manage Employees</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											  <input type="checkbox" id="task-4" checked />
-											  <label for="task-4">Daily Room Service </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-5">
-											 <label for="task-5">Update Employee <i> status </i> </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-6" checked />
-											 <label for="task-6"> Calculate Daily Transaction </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-7">
-											 <label for="task-7">Calculate Daily Profit</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-8" checked />
-											 <label for="task-8">Calculate Daily Cost</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-9" checked />
-											 <label for="task-9">Report Daily Issues</label>
-											</div><!-- /.checkbox -->
-										  </li>
-										  <li class="list-group-item">
-											<div class="checkbox">
-											 <input type="checkbox" id="task-10" />
-											 <label for="task-10">Edit To Do list </label>
-											</div><!-- /.checkbox -->
-										  </li>
-										</ul>
-									  <div class="panel-footer">
-										<p><button class="btn btn-danger btn-perspective btn-block">See all tasks</button></p>
-									  </div>
-									</div><!-- /.panel panel-success -->
-									<!-- END TASK LIST -->
+								<p>
+									<strong>BILL TO : <?PHP echo $fname.' '.$lname; ?></strong>
+								</p>
+								<address> <?PHP
+										echo $address.'<br>
+								 		<abbr title="Phone">Ph:</abbr> '.$phone; 
+								  		?>
+								</address>
+								</div><!-- /.col-sm-6 -->
+								<div class="col-sm-6 text-right">
+								<p>Date : <?PHP echo $_GET['date']; ?></p>
 								</div><!-- /.col-sm-6 -->
 							</div><!-- /.row -->
 							
-						</div><!-- /.col-sm-8 -->
-						<div class="col-lg-4">
-						
-							<!-- BEGIN WEATHER WIDGET 3 -->
-							<div class="the-box no-border" id="weather-widget-1">
-								<h4 class="text-center bolded white-text">Dhaka, Gulshan</h4>
-								<p class="text-center white-text">TONIGHT</p>
-								<div class="weather-widget">
-									<div class="row">
-										<div class="col-xs-6 text-center">
-											<canvas id="sleet" width="140" height="140"></canvas>
-										</div><!-- /.col-xs-6 -->
-										<div class="col-xs-6">
-											<h1 class="bolded degrees white-text">28<i class="wi-degrees"></i></h1>
-											<p class="white-text">Will rain at night</p>
-										</div><!-- /.col-xs-6 -->
-									</div><!-- /.row -->
-								</div><!-- /.weather-widget -->
-								<div class="row">
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">SAT</h4>
-									<canvas id="clear-night" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">27<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">SUN</h4>
-									<canvas id="fog" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">26<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-									<div class="col-xs-4 text-center">
-									<h4 class="white-text">MON</h4>
-									<canvas id="snow" width="50" height="50"></canvas>
-									<h4 class="bolded white-text">15<i class="wi-degrees"></i></h4>
-									</div><!-- /.col-xs-4 -->
-								</div><!-- /.row -->
-							</div><!-- /.the-box bg-info no-border -->
-							<!-- END WEATHER WIDGET 2 -->
-							
-			
-						</div><!-- /.col-sm-4 -->
-					</div><!-- /.row -->
-					
-					<div class="row">
-						<div class="col-sm-8">
-							
-							<!-- BEGIN ITEM SHOWCASE -->
-							<div class="the-box full no-border item-lg">
-								<div id="store-item-carousel-2" class="owl-carousel">
-								  <div class="item full"><img src="assets/img/photo/large/img-7.jpg" class="item-image" alt="Image"></div>
-								  <div class="item full"><img src="assets/img/photo/large/img-8.jpg" class="item-image" alt="Image"></div>
-								</div>
-								<div class="item-des">
-									<div class="the-box transparent no-margin">
-									<h4 class="small-heading more-margin-bottom">ABOUT OUR HOTEL</h4>
-										<h1><a href="#fakelink">Hotel De La Pacific</a></h1>
+							<div class="table-responsive">
+								<table class="table table-th-block table-striped table-dark">
+									<thead>
+										<tr>
+											<th>DESCRIPTION</th>
+											<th style="width: 60px;">QTY</th>
+											<th style="width: 100px;"></th>
+											<th style="width: 100px;">SUBTOTAL</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<p><strong>Room Rent</strong><p>
+												<p class="text-muted">Rooms rented: <?PHP echo $all_rooms; ?> <br> 																						
+												</p>
+											</td>
+											<td><?PHP echo $room_count; ?></td>
+											<td></td>
+											<td class="text-right"><strong><?PHP echo $total_room_price; ?></strong></td>
+										</tr>
+										<?PHP
+										$sql_fac="SELECT * FROM facilities WHERE cust_id='$cust_id' AND paid='No'";
+										$result_fac=mysql_query($sql_fac);
+										if (mysql_num_rows($result_fac) > 0){
+											while($row_fac=mysql_fetch_array($result_fac)){
+												$rate=$row_fac['rate'];
+												$fac_type.=$row_fac['type'].' ';
+												$total_fac_price+=$rate;
+												$fac_count++;
+											}										
+										?>
 										
-										<p class="text-muted item-des-text">
-										Hustle, Loyalty, Respect
-										</p>
-										<p>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star text-warning"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</p>
+										<tr>
+											<td>
+												<p><strong>Facilities</strong><p>
+												<p class="text-muted">Services Used: <?PHP echo $fac_type; ?> <br> 																						
+												</p>
+											</td>
+											<td><?PHP echo $fac_count; ?></td>
+											<td></td>
+											<td class="text-right"><strong><?PHP echo $total_fac_price; ?></strong></td>
+										</tr>
+										<?PHP } ?>
+										<?PHP
+										$sql_food="SELECT * FROM food WHERE cust_id='$cust_id' AND paid='No'";
+										$result_food=mysql_query($sql_food);
+										if (mysql_num_rows($result_food) > 0){
+											while($row_food=mysql_fetch_array($result_food)){
+												$food_price=$row_food['food_price'];
+												$food_type.=$row_food['type'].' ';
+												$total_food_price+=$food_price;
+												$food_count++;
+											}										
+										?>
 										
-									</div><!-- /.the-box .transparent .no-margin -->
-								</div><!-- /.item-des -->
-							</div><!-- /.the-box .full -->
-							<!-- END ITEM SHOWCASE -->
+										<tr>
+											<td>
+												<p><strong>Food</strong><p>
+												<p class="text-muted">Food Ordered: <?PHP echo $food_type; ?> <br> 																						
+												</p>
+											</td>
+											<td><?PHP echo $food_count; ?></td>
+											<td></td>
+											<td class="text-right"><strong><?PHP echo $total_food_price; ?></strong></td>
+										</tr>
+										<?PHP } ?>
+									</tbody>
+									<tfoot>
+										<tr class="success">
+											<td colspan="3" class="text-right">TOTAL</td>
+											<td class="text-right"><strong><?PHP $total=$total_room_price + $total_fac_price + $total_food_price; echo $total; ?></strong></td>
+										</tr>
+										<tr class="warning">
+											<td colspan="3" class="text-right">TAX</td>
+											<td class="text-right"><strong>&#36;75</strong></td>
+										</tr>
+										<tr class="danger">
+											<td colspan="3" class="text-right">GRAND TOTAL</td>
+											<td class="text-right"><strong>&#36;3570</strong></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div><!-- /.table-responsive -->
 							
-						</div><!-- /.col-sm-8 -->
-						<div class="col-sm-4">
 							
-							<!-- BEGIN REMINDER WIDGET -->
-							<div class="the-box no-border full">
-								<div class="the-box bg-dark no-border no-margin">
-									<p class="text-center"><i class="fa fa-clock-o icon-lg"></i></p>
-									<h4 class="bolded less-distance text-danger text-center">My personal reminder</h4>
-								</div><!-- /.the-box no-border no-margin -->
-								<div class="the-box no-border bg-danger no-margin">
-								<h4>Next week agenda</h4>
-								<hr />
-									<div id="tiles-slide-1" class="owl-carousel my-reminder">
-									  <div class="item full text-left">
-										<p>
-										Eating some sand and listening alay songs in the small hole under bridge
-										</p>
-										<p class="small">Wrote about a month ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Go to school again, do homework again, meet some best friends again
-										</p>
-										<p class="small">Wrote about a week ago</p>
-									  </div>
-									  <div class="item full">
-										<p>
-										Finishing all my works, time to vacation, spending time with family and friends
-										</p>
-										<p class="small">Wrote 2 days ago</p>
-									  </div>
-									</div><!-- /#tiles-slide-1 -->
-								</div><!-- /.the-box no-border bg-danger no-margin -->
-							</div><!-- /.the-box .no-border .full -->
-							<!-- END REMINDER WIDGET -->
 							
-						</div><!-- /.col-sm-4 -->
-					</div><!-- /.row -->
+							<div class="row">
+								<div class="col-sm-6">
+									<p>
+										<strong>PAYMENT DETAIL</strong>
+									</p>
+									<address>
+									  BANK NAME HERE<br>
+									  Bank code : 123 456<br>
+									  Account number : 1234-4567-8974<br>
+									  IBAN : 123456<br>
+									  BIC : 123456<br>
+									  Payment reference : SNTR0024
+									</address>
+								</div><!-- /.col-sm-6 -->
+								<div class="col-sm-6 text-right">
+									<p>
+										<strong>Other information</strong>
+									</p>
+									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+								</div><!-- /.col-sm-6 -->
+							</div><!-- /.row -->
+							
+							<div class="jumbotron jumbotron-sm text-center">
+								<h1>Thank you! Come back soon!</h1>
+							</div><!-- /.jumbotron .jumbotron-sm -->
+							
+						</div><!-- /.the-box no-border no-margin-->
+					</div><!-- /.the-box -->
+					<!-- END INVOICE -->				
 				
 				</div><!-- /.container-fluid -->
-				
-				
-				
 				<!-- BEGIN FOOTER -->
 				<footer>
 					&copy; 2014 <a href="#">Hotel De La Pacific</a><br />
@@ -629,6 +511,12 @@
 			</div><!-- /.page-content -->
 		</div><!-- /.wrapper -->
 		<!-- END PAGE CONTENT -->
+		
+		
+	
+		
+		
+		
 		<!--
 		===========================================================
 		END PAGE
