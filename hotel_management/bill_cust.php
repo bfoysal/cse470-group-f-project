@@ -12,8 +12,8 @@ if(isset($_POST['cust_id'])){
 	
 	if($bill && $rooms && $foods && $services){
 		echo 'The customer has been successfully billed. <br> You will be redirected shortly!';
-		//$ref=getenv("HTTP_REFERER");
-		//header("refresh:1; url=index.php"); 
+		$ref=getenv("HTTP_REFERER");
+		header("refresh:1; url=index.php"); 
 	}else{
 		echo die(mysql_error());
 	}

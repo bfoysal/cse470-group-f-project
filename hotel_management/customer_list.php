@@ -189,9 +189,9 @@
 						<!-- Begin Collapse menu nav -->
 						<div class="collapse navbar-collapse" id="main-fixed-nav">
 							<!-- Begin nav search form -->
-							<form class="navbar-form navbar-left" role="search">
+							<form class="navbar-form navbar-left" role="search" action="search.php" method="post">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Search">
+									<input type="text" name="cust_name" class="form-control" placeholder="Search">
 								</div>
 							</form>
 							<!-- End nav search form -->
@@ -270,12 +270,13 @@
 							<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
 							List
-							<span class="label label-danger span-sidebar">3</span>
+							<span class="label label-danger span-sidebar">4</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="members_list.php">Employee List</a></li>
 							<li><a href="customer_list.php">Customers List <span class="label label-success span-sidebar">CURRENT</span></a></li>
-							<li><a href="rooms_list.php">Rooms List</a></li>					
+							<li><a href="rooms_list.php">Rooms List</a></li>
+							<li><a href="billing_list.php">Billing List</a></li>						
 						</ul>
 					</li>
 					<li>

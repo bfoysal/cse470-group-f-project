@@ -274,9 +274,9 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="members_list.php">Employee List</a></li>
-							<li><a href="customer_list.php">Customers List <span class="label label-success span-sidebar">CURRENT</span></a></li>
-							<li><a href="rooms_list.php">Rooms List</a></li>			
-							<li><a href="billing_list.php">Billing List</a></li>			
+							<li><a href="customer_list.php">Customers List</a></li>
+							<li><a href="rooms_list.php">Rooms List</a></li>	
+							<li><a href="billing_list.php">Billing List</a></li>					
 						</ul>
 					</li>
 					<li>
@@ -287,11 +287,10 @@
 							<span class="label label-success span-sidebar">2</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="bill_food.php">Food 24/7 <span class="label label-success span-sidebar">CURRENT</span></a></li>
+							<li><a href="bill_food.php">Food 24/7</a></li>
 							<li><a href="bill_services.php">Facilities</a></li>						
 						</ul>
-					</li>
-				</ul>
+					</li>				</ul>
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->
 
@@ -301,43 +300,58 @@
 				
 				<div class="container-fluid">
 					<!-- Begin page heading -->
-					<h1 class="page-heading">Customer List <small>Billing Food</small></h1>
+					<h1 class="page-heading">Customer List <small>Showing search results</small></h1>
 					<!-- End page heading -->
 				
 					<!-- Begin breadcrumb -->
 					<ol class="breadcrumb default square rsaquo sm">
 						<li><a href="index.php"><i class="fa fa-home"></i></a></li>
 						<li><a href="index.php">Hotel</a></li>
-						<li class="active">Add Food</li>
+						<li class="active">Search</li>
 					</ol>
 					<!-- End breadcrumb -->
 
 					<!-- Begin table with avatar -->
-					<h4 class="small-title">Customer Details</h4>
+					<h4 class="small-title">Search Details</h4>
 					<div class="the-box no-border full">
 						<div class="table-responsive">
 							<table class="table table-th-block">
 								<thead>
-									<tr><th style="width: 30px;">ID:</th><th>Full name</th><th>Credit Card</th><th>Phone</th><th>Order Food</th></tr>
+									<tr><th style="width: 30px;">ID:</th><th>Full name</th><th>Location</th><th>Email</th><th>Credit Card</th><th>Phone</th><th>Gender</th><th>Facilities</th><th>Food</th></tr>
 								</thead>								
 								<tbody>
 								<?PHP
-								$sql="SELECT * FROM customer";
+								$cust_name=isset($_POST['cust_name']) ? $_POST['cust_name'] : '';
+								$sql="SELECT * FROM customer WHERE last_name='$cust_name' OR first_name='$cust_name'";
 								$result=mysql_query($sql);
+								if(!$result){
+									echo die(mysql_error());
+								}
 								if (mysql_num_rows($result) > 0) {	
 									while ($row = mysql_fetch_array($result)) {	
 										$cust_id=$row['cust_id'];
 										$fname=$row['first_name'];
-										$lname=$row['last_name'];					
+										$lname=$row['last_name'];
+										$cust_email=$row['cust_email'];
+										$gender=$row['gender'];
+										$address=$row['address'];						
 										$phone_no=$row['phone_no'];
 										$credit_card=$row['credit_card'];
 										echo'<tr>
 												<td>'.$cust_id.'</td>
 												<td>'.$fname.' '.$lname.'</td>
+												<td>'.$address.'</td>
+												<td>'.$cust_email.'</td>
 												<td>'.$credit_card.'</td>
-												<td>'.$phone_no.'</td>
-												<td><a href="add_food.php?cust_id='.$cust_id.'"><span class="label label-danger">Add Food</span></a></td>
-											</tr>';
+												<td>'.$phone_no.'</td>';
+												if ($gender=='Female'){
+													echo '<td><span class="label label-warning">'.$gender.'</span></td>';
+												}else{
+													echo '<td><span class="label label-success">'.$gender.'</span></td>';
+												}
+											 echo'<td><a href="add_service.php?cust_id='.$cust_id.'"><span class="label label-danger">Add Services</span></a></td>
+											 <td><a href="add_food.php?cust_id='.$cust_id.'"><span class="label label-info">Add Food</span></a></td>
+											 </tr>';
 									 }
 								 }
 								 ?>								
@@ -359,11 +373,6 @@
 			</div><!-- /.page-content -->
 		</div><!-- /.wrapper -->
 		<!-- END PAGE CONTENT -->
-		
-		
-	
-		
-		
 		
 		<!--
 		===========================================================
