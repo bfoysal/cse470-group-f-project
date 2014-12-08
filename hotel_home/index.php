@@ -191,7 +191,20 @@
             <ul>
               <li>
                 <img src="images/img1.jpg" alt="">
-                <h2>Single room BDT999</h2>
+				<?PHP 
+					$sql_room=mysql_query("SELECT * FROM room_price WHERE room_type='Single'");
+					$row=mysql_fetch_array($sql_room);					
+					$single_room=$row['room_price'];
+					
+					$sql_room=mysql_query("SELECT * FROM room_price WHERE room_type='Double'");
+					$row=mysql_fetch_array($sql_room);
+					$double_room=$row['room_price'];
+					
+					$sql_room=mysql_query("SELECT * FROM room_price WHERE room_type='Triple'");
+					$row=mysql_fetch_array($sql_room);
+					$triple_room=$row['room_price'];
+				?>
+                <h2>Single room BDT<?PHP echo $single_room; ?></h2>
                 <p>Single bedroom with a kitchen, mini-fridge, bathroom with slippers and hair-dryer, LCD TV and free Wi-Fi.</p>
                 <a href="" class="read_more">Read more</a>
                 <div class="hidden">
@@ -201,7 +214,7 @@
               </li>
               <li>
                 <img src="images/img1.jpg" alt="">
-                <h2>Double room BDT999</h2>
+                <h2>Double room BDT<?PHP echo $double_room; ?></h2>
                 <p>Double room with a kitchen, mini-fridge, bathroom with slippers and hair-dryer, LCD TV and free Wi-Fi.</p>
                 <a href="" class="read_more">Read more</a>
                 <div class="hidden">
@@ -211,7 +224,7 @@
               </li>
               <li>
                 <img src="images/img1.jpg" alt="">
-                <h2>Triple room BDT999</h2>
+                <h2>Triple room BDT<?PHP echo $triple_room; ?></h2>
                 <p>Triple room with a kitchen, mini-fridge, bathroom with slippers and hair-dryer, LCD TV and free Wi-Fi.</p>
                 <a href="" class="read_more">Read more</a>
                 <div class="hidden">
